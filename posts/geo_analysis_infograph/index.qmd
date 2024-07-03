@@ -1,0 +1,19 @@
+---
+title: "Geospatial Analysis Infographic"
+description: "GDP analysis across Middle East (FY 2020)"
+author: "Oscar Cardec"
+date: "4/13/2020"
+categories: [Tablea, Infographic, Geo]
+image: geospatial_analysis.png
+page-layout: full
+---
+
+### Geospatial Infographic
+
+The main objective of this visual is to explore relationships and potential patterns between economic prosperity and possible quality of life across the included countries. This could be the beginning of deeper assessments to contain: economic disparities, policy and decision making, international relationships, health care, income distribution, and more.
+
+---
+
+![](geospatial_analysis.png){fig-align="center" width="1800"}
+
+Data source: [World Bank Group](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=ZQ)

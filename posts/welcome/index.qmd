@@ -1,0 +1,19 @@
+---
+title: "Welcome To My Projects"
+author: "Oscar Cardec"
+date: "2024-07-01"
+categories: [news]
+image: giphysample.webp
+---
+
+Welcome to my projects!
+
+---
+
+This is my first post, it's my hope you enjoy the content of this repo and learn from my posts. Please reach back and feel free to provide some constructive feedback.
+
+Let's connect.
+
+-   OC
+
+![](welcome.gif){fig-align="center" width="1000"}

@@ -1,0 +1,19 @@
+---
+title: "Join the Alliance"
+description: ""
+author: "Oscar Cardec"
+date: "3/26/2020"
+categories: [Infographic, Star Wars, Tableau]
+image: starwars.jpg
+page-layout: full
+---
+
+### Infographic   
+
+By definition, an infographic is a visual representation of information, data, or knowledge intended to present complex information, quickly, and clearly. It combines graphics, text, and data to communicate a message, explain a concept or show data patterns and relationships.
+
+---
+
+![](jointhealliance.png){fig-align="center" width="1800"}
+
+Data source: [Kaggle](https://www.kaggle.com/datasets/jsphyg/star-wars?select=csv)

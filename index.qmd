@@ -1,0 +1,51 @@
+---
+title: Oscar Cardec
+id: about-block
+image: img/my_image.jpeg
+
+about:
+  template: trestles
+  image-width: 15em
+  image-shape: round
+  
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/CardO37474
+    - icon: github
+      text: Github
+      href: https://github.com/ocardec
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/oscarcardec
+    - icon: envelope
+      text: Email
+      href: "mailto:ocmain@gocardec.com"  
+---
+
+::: {#about-block}
+:::
+
+## Welcome to my Portfolio!
+
+<br/>
+
+### Bio
+
+Highly experienced Data Scientist and Machine Learning Engineer with over 20 years of military experience and comprehensive knowledge across data analysis, visualizations, machine learning, deep learning, and Generative AI. Specializing in data pipelines, exploration, data cleaning & analysis, visualization, and modeling; with both structured and unstructured data sources. Expert in developing complex visualizations and leveraging advanced machine learning techniques to solve global challenges. Proven ability to translate complex data insights into actionable information for decision-making in public and private sectors.
+
+### Education
+
+University of Maryland, Global Campus - MS in Data Analytics (MSDA)\
+American Military University - BS in Information Technology Management\
+Community College of the Air Force - AS in Intelligence Studies & Technology
+
+### Experience
+
+WTI \| R&D, Data Strategist \| Jul 2023 - Present\
+GovCIO \| Data Scientist & ML Specialist \| Feb 2023 - Jul 2023\
+Deloitte & Touché, LLC \| Lead Data Scientist \| Apr 2021 - Feb 2023\
+Accenture Federal Services \| Data Science Intern \| Oct 2020 - Mar 2021\
+US Air Force \| Manager, Intelligence Analyst \| 2013 - 2020\
+US Air Force \| Information Manager & Database Administrator \| 2007 - 2013\
+US Air Force \| Aerospace Maintenance Craftsman \| 2000 - 2007\
