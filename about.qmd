@@ -2,7 +2,7 @@
 title: "About Me"
 ---
 
-<br/> Hi, my name is Oscar Cardec.
+<br/>
 
 I am passionate about harnessing the power of data and machine learning to unlock endless possibilities. With a background in military operations and intelligence analysis, I have dedicated my career to transforming raw data into actionable insights that drive innovation and growth.
 
@@ -17,4 +17,10 @@ As a data professional at my current company, I continue to explore the frontier
 
 When I'm not diving into dataframes and algorithms, you can find me reading, hiking or spending quality time with my wife and lovely kiddos; always eager to explore new horizons and build new memories.
 
-Thank you for visiting my portfolio. Let's connect and explore how we can harness the power of data together!
+Let's connect and explore how we can harness the power of data together!
+
+<br/>
+
+Thank you for visiting my portfolio.
+
+\~ OC

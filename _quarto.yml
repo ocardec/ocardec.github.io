@@ -24,6 +24,7 @@ website:
         href: resources/index.qmd
       - text: "Books"
         href: books/index.qmd
+        
     # social media handles
     right:
       - icon: folder-symlink
@@ -48,7 +49,7 @@ website:
 
 project:
   type: website
-  output-dir: _site
+  output-dir: doc
   preview: 
     port: 2727
     browser: true

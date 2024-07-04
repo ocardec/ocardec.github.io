@@ -1,0 +1,11 @@
+---
+title: "Kmeans Clustering"
+description: "Unsupervised learning clustering and classification with Kmeans"
+author: "Oscar Cardec"
+date: "9/4/2020"
+categories: [kmeans, clustering, classification]
+image: landsat.webp
+page-layout: full
+---
+
+Report in-progress ...

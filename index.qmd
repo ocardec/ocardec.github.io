@@ -2,10 +2,9 @@
 title: Oscar Cardec
 id: about-block
 image: img/my_image.jpeg
-
 about:
   template: trestles
-  image-width: 15em
+  image-width: 12em
   image-shape: round
   
   links:
@@ -17,14 +16,14 @@ about:
       href: https://github.com/ocardec
     - icon: linkedin
       text: LinkedIn
-      href: https://www.linkedin.com/in/oscarcardec
+      href: https://www.linkedin.com/in/oscarcardec/
     - icon: envelope
       text: Email
       href: "mailto:ocmain@gocardec.com"  
+    - icon: file-person
+      text: Resume
+      href: resume/index.qmd
 ---
-
-::: {#about-block}
-:::
 
 ## Welcome to my Portfolio!
 
