@@ -1,0 +1,15 @@
+{
+  "hash": "26b0473a294ae93881979bca592185a2",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"House Market Analysis - Regression Model\"\nauthor: \"Oscar Cardec\"\ndate: \"7/21/2020\"\ncategories: [linear regression, house market]\nimage: housing.jpeg\npage-layout: full\n\n---\n\n\n\n\nHere is a quick descriptive analysis and potential regression model to build a comprehensive housing market analysis. The main purpose is to extract valuable insights related to any association between sales prices, home values, and/or additional property features and how these contribute to the overall value and sale of a property. \n\n### Data\n\n\nThe data employed here pertains to the houses found in a given California district and some summary stats about them based on the 1990 census data. This data was obtained from [Kaggle](https://www.kaggle.com/datasets/camnugent/california-housing-prices), and \n\n\nThe columns are as follows, their names are pretty self explanatory:\n\nlongitude\n\nlatitude\n\nhousing_median_age\n\ntotal_rooms\n\ntotal_bedrooms\n\npopulation\n\nhouseholds\n\nmedian_income\n\nmedian_house_value\n\nocean_proximity\n\n\n\n\n\n\n\n\n\nReport in progress ...",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
