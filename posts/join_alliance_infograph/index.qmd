@@ -3,7 +3,7 @@ title: "Join the Alliance"
 description: ""
 author: "Oscar Cardec"
 date: "3/26/2020"
-categories: [Infographic, Star Wars, Tableau]
+categories: [infographic, tableau]
 image: starwars.jpg
 page-layout: full
 ---

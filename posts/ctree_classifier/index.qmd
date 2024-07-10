@@ -3,7 +3,7 @@ title: "Conditional Inference Trees"
 description: "Supervised learning classifications using the R package **partykit** conditional inference trees"
 author: "Oscar Cardec"
 date: "10/22/2020"
-categories: [CTREE, Decision Tree, Classification]
+categories: [ctree, decision tree, classification]
 image: ctg.jpeg
 page-layout: full
 bibliography: references.bib
@@ -11,7 +11,7 @@ bibliography: references.bib
 
 ### Introduction
 
-Cardiotocograms, also known as CTGs, have been instrumental within clinical medicine for a long time. Obstetricians use these measurements and classifications to obtain detailed information and intelligence about newborns and their mother prior and during labor. In 2018, an article presented through the Journal of Clinical Medicine detailed the practicality of CTG. The same article noted that interpretations of these censorial readings is mainly attributed to the observer; which creates challenges of consistency of interpretations and defies the human naked- eye. Questions like what happens if/when the interpreter misses a key detail, or what could be the meaning of a combination of diagnostic signals, furthermore, what time-sensitive conditions may these measurements expose, requiring immediate actions? These are few examples of concerns posed by the continuous practice of merely optical assessments of a df. [@zhao2018]
+Cardiotocograms, also known as CTGs, have been instrumental within clinical medicine for a long time. Obstetricians use these measurements and classifications to obtain detailed information and intelligence about newborns and their mother prior and during labor. In 2018, an article presented through the Journal of Clinical Medicine detailed the practicality of CTG. The same article noted that interpretations of these censorial readings is mainly attributed to the observer; which creates challenges of consistency of interpretations and defies the human naked- eye. Questions like what happens if/when the interpreter misses a key detail, or what could be the meaning of a combination of diagnostic signals, furthermore, what time-sensitive conditions may these measurements expose, requiring immediate actions? These are few examples of concerns posed by the continuous practice of merely optical assessments of a CTG. [@zhao2018]
 
 The following exploration presents an assessment of CTGs using the conditional inference tree (ctree) model. The same shows how the algorithm expedites and enhances the interpretation of CTG readings while appraising multiple fetal readings simultaneously. Moreover, the study aims to identify potential hidden patters which may require further attention.
 

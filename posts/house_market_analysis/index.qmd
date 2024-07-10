@@ -2,7 +2,7 @@
 title: "House Market Analysis - Regression Model"
 author: "Oscar Cardec"
 date: "7/21/2020"
-categories: [regression, housing, linear]
+categories: [linear regression, house market]
 image: housing.jpeg
 page-layout: full
 

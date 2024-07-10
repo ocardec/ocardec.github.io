@@ -3,31 +3,40 @@ title: "Time Series Analysis - AAPL"
 description: ""
 author: "Oscar Cardec"
 date: "7/15/2020"
-categories: [Time Series, Forecast]
+categories: [time series, forecasting]
 image: start.png
 page-layout: full
 ---
 
 ### Time Series Analysis
 
-The following is a basic time series analysis of Apple, Inc Stocks market between July 2019 and July 2020.
+The following is a basic time series analysis of Apple, Inc. stock market between July 2019 and July 2020.
 
+<br/>
 ---
 
 ![](start.png){width="1500"}
 
 Notice how the limitation of global imports starts to affect the company around Feb 2020. By March of the same year, the company reported loses over \$1 Trillion. Nevertheless, in June 10, 2020, Apple became the first U.S. company to reach \$1.5 Trillion market cap.
 
+<br/>
+
 ![](introduction.png){width="1500"}
 
 Correlation between external events, closed price, and total volume.
+
+<br/>
 
 ![](cost_price.png){width="1500"}
 
 Considering the previous 20 periods we can display the linear trend and forecast estimate.
 
+<br/>
+
 ![](forecast.png){width="1500"}
 
 Ultimately, all graphics can get organized as an interactive dashboard using Tableau's capabilities.
+
+<br/>
 
 ![](dashboard.png){width="1500"}

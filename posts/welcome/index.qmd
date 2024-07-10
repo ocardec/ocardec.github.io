@@ -2,7 +2,6 @@
 title: "Welcome To My Projects"
 author: "Oscar Cardec"
 date: "2024-07-01"
-categories: [news]
 image: giphysample.webp
 ---
 
@@ -10,7 +9,7 @@ Welcome to my projects!
 
 ------------------------------------------------------------------------
 
-This is my first post, it's my hope you enjoy the content of this portfolio and learn learn something new from my posts. Please reach back and feel free to provide some constructive feedback.
+This is my first post, it's my hope you enjoy the content of this portfolio and learn something new from my posts. Please reach back and feel free to provide some constructive feedback.
 
 Let's connect.
 
