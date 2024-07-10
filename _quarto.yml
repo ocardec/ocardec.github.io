@@ -45,7 +45,7 @@ website:
     left: |
       <span class="faux-block">&#169; Copyright 2024 Oscar Cardec</span>
     right: |
-      <span class="faux-block">Last Update: Jun 2024</span>
+      <span class="faux-block">Last Update: Jul 2024</span>
 
 project:
   type: website

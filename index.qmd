@@ -27,8 +27,6 @@ about:
 
 ## Welcome to my Portfolio!
 
-<br/>
-
 ### Bio
 
 Highly experienced Data Scientist and Machine Learning Engineer with over 20 years of military experience and comprehensive knowledge across data analysis, visualizations, machine learning, deep learning, and Generative AI. Specializing in data pipelines, exploration, data cleaning & analysis, visualization, and modeling; with both structured and unstructured data sources. Expert in developing complex visualizations and leveraging advanced machine learning techniques to solve global challenges. Proven ability to translate complex data insights into actionable information for decision-making in public and private sectors.
