@@ -1,0 +1,313 @@
+---
+title: "Aicraft's Lateral Deviation - Part 1"
+description: "Assessment of different classification algorithms and their respective results"
+author: "Oscar Cardec"
+date: "11/12/2021"
+categories: [EDA, ETL, data, distribution, sample]
+image: images/acft.jpg
+page-layout: full
+freeze: true
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+bibliography: references.bib
+editor_options: 
+  chunk_output_type: inline
+---
+
+### Introduction
+
+On any given day, thousands of flights are maneuvering throughout the U.S. national airspace. All of these are constantly monitored by one entity, the Federal Aviation Administration (FAA). The FAA's primary mission involves ensuring that flight operations are conducted efficiently, and to the highest levels of safety and security. In support of such endeavor, the continuous monitoring and accurate prediction of an aircraft position is a vital process across aeronautics and the FAA's mission. Accurate forecasting of a flight could have a significant impact on businesses’ schedules, transportation logistics, or even protecting the environment. In today’s era of big data and technology advances monitoring of en-route flights its an imperative.
+
+> **Disclaimer: The views and opinions expressed in this report are those of the author and do not necessarily reflect the views or positions of any of the entities herein referred.**
+
+The following assessment builds out of a previously conducted analysis [@paglione2010] which documented a comprehensive evaluation of numerous aircraft's lateral deviations. For context, lateral deviations enclose divergent measurements of an aircraft’s actual position in comparison to its authorized flight route. Here I assess and identify alternate options to sustain aerial operations management using modern machine learning algorithms to expose aircraft lateral anomaly detection. It employs innovative statistical analyses, compare results with the previous findings, and introduces a more sophisticated approach to improve the tracking of civil and military aviation on near real-time basis.
+
+![](images/lateral_deviation_img.png){fig-align="center" width="500"}
+
+### Data
+
+To accomplish the aforementioned, historical data of numerous flights is utilized. This data involves different continuous and categorical observations including the aircraft’s altitude, measurement times, calculated distances from targeted route, lateral and vertical statuses and suggested corrective heading among other.
+
+The original data encompasses 20 control centers within the Continental United States averaging around 500,000 observations per center. That aggregates to over 10,000,000 measurements nation-wide in less than a 24-hour window. Analysis of such figures result costly when it comes to computational power and time. For such reason, I take a sampled-data approach, assuming that the data is representative of the entire population and statistically speaking inferences may be applied to the entire population. The following diagram provides a basic depiction of involved variables.
+
+![](images/variables.png){fig-align="center" width="600"}
+
+### Exploratory Data Analysis
+
+As mentioned, the sampled data contains approximately 1.9 million flight observations from 4 specific Air Route Traffic Control Centers (ARTCC), namely, Chicago (ZAU), New York (ZNY), Miami (ZMA), and Los Angeles (ZLA). These observations contain attributes of an aircraft while cruising from one fix point or ARTCC to another, and the recorded data in increments of 10 seconds.
+
+![](images/artcc.png){fig-align="center" width="500"}
+
+<br/>
+
+```{r data_ingest}
+#| echo: false 
+#| output: false
+#| warning: false
+#| code-fold: false
+#| include: false 
+
+# Requirements
+if (!require("pacman")) install.packages("pacman")
+# Load required libraries
+pacman::p_load(pacman, psych, plyr, gganimate, ggstatsplot, stats, corrplot,
+               ggthemes, ggfortify, Metrics, rio, tidyverse, forecast,
+               hrbrthemes, e1071, datawizard, tidyr, pracma, gridExtra, psych)
+# Set work directory
+mywd <- setwd("~/Documents/GitHub/ocquarto_portfolio/posts/multi_model_capstone")
+# Import/combine files
+sel_files <- list.files(path = mywd, pattern = "*.csv", full.names = F)
+rawdf <- ldply(sel_files, read_csv)
+```
+
+**Note**: During exploratory steps the data is ingested and analyzed from a descriptive statistics standpoint. The 14 variables (different format types) are confirmed along with the total of 1.9 million observations. Also, notice how the "buildTime" variable is given as cumulative seconds, and the "latAdherStatus" as a character type. Notice, the "latAdherStatus" (lateral adherence status) variable which describes how distant the aircraft is from its authorized route (threshold recorded in nautical miles). This multivariate attribute is used as the target or dependable variable.
+
+![](images/thresholds.png){fig-align="center" width="550"}
+
+```{r data_preview}
+str(rawdf)
+```
+
+**Note**: After gaining a basic understanding of the data set structure, I selected a particular set of variables, renamed them for easier understanding, factorized the labels from categorical values to a numerical for best calculation purposes, and defined a transformation function to convert time values from numeric to HMS format.
+
+```{r data_transformation, fig.height=8,fig.width=12}
+#| warning: false
+# data selection
+mdata <- rawdf %>% 
+  as_tibble() %>% 
+  dplyr::select(acid,cid,buildTime,stCenterTm,endCenterTm,redLat,angle2NextFix,
+                latAdherStatus, artcc)
+
+# factorization of lateral adherance status
+levels <-  c("innerInConf", "midInConf", "midNonConf", "outerNonConf", "endOfRoute")
+labels <-  c("1", "2", "3", "4", "5")
+mdata$latAdherStatus <- factor(mdata$latAdherStatus, levels = levels, labels = labels)
+
+# variables renaming
+maindf <- dplyr::rename(.data = mdata,
+                        AircraftID = acid,
+                        ComputerID = cid,
+                        MeasureTaken = buildTime,
+                        ControlStartTm = stCenterTm,
+                        ControlEndTm = endCenterTm,
+                        LateralDeviation = redLat,
+                        CorrectionAngle = angle2NextFix,
+                        LateralStatus = latAdherStatus,
+                        ARTCC = artcc
+                        )
+
+# time conversion 
+pacman::p_load(lubridate, hms)
+timeconvert <- function(x){
+  # Transform time period from string to hms format ## 
+  mt <- seconds_to_period(x)
+  mtstring <- sprintf('%02d:%02d:%02d', mt@hour, minute(mt), second(mt))
+  hms::as_hms(mtstring)}
+
+# trans with dplyr::mutate
+df <- maindf %>% 
+   dplyr::mutate(ARTCC = as.factor(ARTCC), 
+    UniqueID = paste(AircraftID, ComputerID, sep = "_"), 
+    Airline = substring(AircraftID, 1, 3),
+    Airline = as.factor(Airline),
+    MeasureTaken = as.numeric(MeasureTaken),
+    CorrectionAngle = as.character(CorrectionAngle),
+    LateralDeviation = as.double(LateralDeviation),
+    xMeasureTaken = timeconvert(MeasureTaken),
+    xControlStartTm = timeconvert(ControlStartTm),
+    xControlEndTm = timeconvert(ControlEndTm))
+
+df$CorrectionAngle <- as.double(df$CorrectionAngle)
+
+# exclusion of NAs introduced by coercion 
+df$CorrectionAngle[is.na(df$CorrectionAngle)] <- max(df$CorrectionAngle, na.rm = TRUE) + 1
+head(df, 10)
+```
+
+**Note**: Next, I portray the distributions of some variables. Considering the following graphics, I anticipate significant variance across the target variable. The original data appears to be consistent along the mean, of course with the exception of some outliers.
+
+```{r latAdherence, fig.height=6,fig.width=10}
+# Lateral Adherence Status Labels
+par(mfrow = c(1, 1))
+plot(df$LateralDeviation, type = "l", ylab = "Nautical Miles",
+     col = "darkblue",  main = "Lateral Deviations")
+```
+
+```{r distributions, fig.height=6,fig.width=10}
+#| warning: false
+
+# lateral deviation boxplot
+par(mfrow=c(2,2), mar=c(3,3,3,3))
+boxplot(df$LateralDeviation, outline = TRUE, border = "darkred", 
+        ylab = "Nautical Miles", main = "Boxplot Lateral Deviations")
+boxplot(df$LateralDeviation, outline = FALSE, col = "lightgray", border = "darkred",
+        ylab = NULL, main = "Boxplot Lateral Deviations\n(No Outliers)")
+# histogram target variable
+hist((df$LateralDeviation), main="Histogram Lateral Deviations",
+     xlab="Nautical Miles", border="white", col = "darkblue", labels = FALSE)
+# Lateral Deviations Log2 Calc Histogram
+hist((log2(df$LateralDeviation)), main="Histogram Lateral Deviations\n(Log2)",
+     xlab="Nautical Miles", ylab = NULL, border="white", col = "darkblue", labels = FALSE)
+```
+
+```{r new_sel1}
+#| echo: false
+#| output: false
+
+sel1 <- df %>% 
+  dplyr::select(
+    ARTCC,
+    Airline,
+    UniqueID,
+    MeasureTaken,
+    xMeasureTaken,
+    xControlStartTm,
+    xControlEndTm,
+    LateralDeviation,
+    CorrectionAngle,
+    LateralStatus
+  ) 
+```
+
+**Note**: The correction angle attribute refers to the degrees required to regain the proper heading in order to reach the next fix point associated with the flight plan. The following is a granular view of the correction angle data observations.
+
+```{r correctionAngle_distro, fig.height=6,fig.width=10}
+#| warning: false
+
+par(mfrow=c(2,1))
+# Before
+hist((sel1$CorrectionAngle), main="Correction Angle Histogram",
+     xlab="Degrees", border="white", col = "darkred", labels = FALSE)
+# After Log
+hist(log2(sel1$CorrectionAngle), main="Correction Angle Histogram\n(Log2)",
+     xlab="Degrees", border="white", col = "darkblue", labels = FALSE)
+```
+
+**Note**: Next I display each ARTCC and their respective aircraft behaviors in relation to their assigned route. Bottom line, the data distribution maintains uniformity when I separate the levels of deviations by their centers.
+
+```{r latDeviations, fig.height=6,fig.width=10}
+#| warning: false
+
+#Lateral Deviation/Status per ARTCC
+pacman::p_load(gridExtra)
+par(mfrow = c(1,1))
+
+ls1 <- sel1 %>% 
+  filter(LateralStatus == "1") %>% 
+  ggplot()+
+  aes(LateralDeviation, 
+      ARTCC)+
+  xlab(NULL)+
+  geom_jitter(col = "grey", size = .5, alpha = 0.2, show.legend = F)+
+  theme_light()
+
+ls2 <- sel1 %>% 
+  filter(LateralStatus == "2") %>% 
+  ggplot()+
+  aes(LateralDeviation, 
+      ARTCC) +
+  ylab(NULL)+xlab(NULL)+
+  geom_jitter(col = "red", size = .5, alpha = 0.2, show.legend = F)+
+  theme_light()
+
+ls3 <- sel1 %>% 
+  filter(LateralStatus == "3") %>% 
+  ggplot()+
+  aes(LateralDeviation, 
+      ARTCC)+xlab(NULL)+
+  geom_jitter(col = "green", size = .5, alpha = 0.2, show.legend = F)+
+  theme_light()
+
+ls4 <- sel1 %>% 
+  filter(LateralStatus == "4") %>% 
+  ggplot()+
+  aes(LateralDeviation, 
+      ARTCC)+
+  ylab(NULL)+xlab(NULL)+
+  geom_jitter(col = "blue", size = .5, alpha = 0.2, show.legend = F)+
+  theme_light()
+
+ls5 <- sel1 %>% 
+  filter(LateralStatus == "5") %>% 
+  ggplot()+
+  aes(LateralDeviation, 
+      ARTCC)+
+  geom_jitter(col = "cyan", size = .5, alpha = 0.2, show.legend = F)+
+  theme_light()
+
+ls6 <- sel1 %>% 
+  ggplot()+
+  aes(LateralDeviation, 
+      ARTCC, col = sel1$LateralStatus)+
+  ylab(NULL)+
+  geom_jitter(col = sel1$LateralStatus, size = .5, alpha = 0.1, show.legend = T)+
+  theme_light()
+
+grid.arrange(arrangeGrob(ls1, ls2, ls3, ls4, ls5, ls6), nrow=1)
+```
+
+**Note**: One key insight, the above graph shows ZMA as the control center with the highest variability or dispersion. The trait makes sense considering that ZMA (Miami) sits in a significant different location more susceptible to different weather elements and offshore inbound and transient air traffic.
+
+```{r IQR_calculation}
+
+ssel3 <- sel1
+
+# function to calculate bounds
+calc_iqr_bounds <- function(data) {
+  Q <- quantile(data, probs = c(0.25, 0.75), na.rm = TRUE)
+  iqr <- IQR(data, na.rm = TRUE)
+  lower <- Q[1] - 1.5 * iqr
+  upper <- Q[2] + 1.5 * iqr
+  return(list(lower = lower, upper = upper))
+}
+
+# calculation of bounds
+bounds <- calc_iqr_bounds(ssel3$LateralDeviation)
+NOutliers <- subset(ssel3$LateralDeviation, ssel3$LateralDeviation > bounds$lower & 
+                    ssel3$LateralDeviation < bounds$upper)
+
+# distributions with and without outliers 
+par(mfrow = c(1, 2))
+boxplot(ssel3$LateralDeviation, col = "darkgrey", border = "darkred", 
+        horizontal = FALSE, main = "Distribution with Outliers")
+
+boxplot(NOutliers, col = "darkgrey", border = "darkblue", 
+        main = "Distribution without Outliers")
+```
+
+**Note**: For best perception of these deviations, I went ahead and calculated additional measures applying moving average filters like weighted moving average with a backward window of two positions, the absolute values of the weighted moving average, and other backward windows to include the 4th prior period and the 7th period.
+
+```{r featureEng}
+#| warning: false
+
+pacman::p_load(forecast, pracma)
+df1 <- ssel3
+df1["WMA"] <- pracma::movavg(df1$LateralDeviation, n = 2, type = "w")
+df1["Abs_WMA"] <- abs(df1$WMA)
+df1["ma4_lateraldev"] <- forecast::ma(df1$LateralDeviation, order=4)
+df1["ma7_lateraldev"] <- forecast::ma(df1$LateralDeviation, order=7)
+summary(df1)
+```
+
+------------------------------------------------------------------------
+
+<br/>
+
+**Note**: In conclusion of the EDA, I went from having limited understanding of the variables, to a robust and feature-engineered data frame while maintaining the original characteristics of the data. At this point, we want to split the tidy data frame, train and test the classification model.
+
+```{r drop_NAs}
+
+clean_df1 <- df1[complete.cases(df1),]
+head(clean_df1)
+```
+
+```{r save_data}
+#| echo: false
+#| output: false
+
+# Export final tidy df
+# output <- setwd("~/Documents/GitHub/ocquarto_portfolio/posts/multi_model_capstone")
+# write.csv(clean_df1,file = paste0(output, "/tidydf.csv"),row.names = FALSE )
+```
+
+<br/><br/>

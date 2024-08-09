@@ -43,9 +43,9 @@ website:
     type: textbox
   page-footer: 
     left: |
-      <span class="faux-block">&#169; Copyright 2024 Oscar Cardec</span>
+      <span class="faux-block">&#169; Copyright 2024 Cardec Analytics</span>
     right: |
-      <span class="faux-block">Last Update: Jul 2024</span>
+      <span class="faux-block">Last Update: Aug 2024</span>
 
 project:
   type: website

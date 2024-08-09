@@ -1,0 +1,237 @@
+---
+title: "Aicraft's Lateral Deviation - Part 2"
+description: "Assessment of different classification algorithms and their respective results"
+author: "Oscar Cardec"
+date: "11/13/2021"
+categories: [svm, naïve bayes, gbm, knn, ctree, rpart]
+image: images/acft.jpg
+page-layout: full
+freeze: true
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+editor_options: 
+  chunk_output_type: inline
+bibliography: references.bib
+---
+
+### Introduction
+
+As previously explained on [Aircraft's Lateral Deviation - Part I](../multi_model_capstone/index.qmd), understanding of an aircraft lateral intent is vital across the air traffic industry for safety, and flight efficiency among other factors. This task can easily become unwieldy when triaging millions of measurements per hour across the entire National Air Space (NAS). On this section, I present a variety of potential predictive models for the classification of an aircraft’s lateral intent, and which could improve automated detection systems across this field.
+
+> **Disclaimer:** **The views and opinions expressed in this report are those of the author and do not necessarily reflect the views or positions of any of the entities herein referred.**
+
+```{r requirements}
+#| echo: false
+#| warning: false
+
+if (!require("pacman")) install.packages("pacman")
+# load required libraries 
+pacman::p_load(pacman, arules, caret, datawizard, rio, tidyverse, naivebayes, psych, plyr, ggstatsplot, stats, corrplot, ggimage, ggthemes, ggfortify, forecast, scales, pracma, datasets, rsvg, hrbrthemes, e1071, tidyr, party, partykit, cvms, gbm, SmartEDA, randomForest, gridExtra, klaR, dlookr, flextable, gtsummary)
+
+# file location
+mywd <- setwd("~/Documents/GitHub/ocquarto_portfolio/posts/multi_model_part2")
+# import data
+sel_files <- list.files(path = mywd, pattern = "tidydf.csv", full.names = F) 
+rawdf <- ldply(sel_files, read_csv) 
+rawdf <- dplyr::rename(rawdf, Class = "LateralStatus")
+
+rawdf$Class <- as.character(rawdf$Class) 
+levels <- c("1", "2", "3", "4", "5") 
+labels <- c("InConf", "Mid-InConf", "Mid-NonConf", "OutConf", "EndOfRoute") 
+# factorizing the class variable
+rawdf$Class <- factor(rawdf$Class, levels = levels, labels = labels)
+
+df1 <- rawdf %>% 
+  dplyr::select(LateralDeviation, 
+                CorrectionAngle, 
+                WMA, 
+                Class) 
+```
+
+### Original Data
+
+The first step was to ingest the tidy data generated in [Part I](../multi_model_capstone/index.qmd). Note, as showing below the data class label with the least number of observations is "EndOfRoute" with \~85,000; indicating a potential option to downsample the data before fitting the models.
+
+```{r original_data,fig.height=6,fig.width=10}
+#| warning: false
+#| echo: false
+
+rawdf %>%
+  select(LateralDeviation, CorrectionAngle, WMA, 
+         Abs_WMA, ma4_lateraldev, Class) %>%
+  tbl_summary(by=Class) %>%
+  gtsummary::add_p()
+```
+
+![](images/splom.png){width="900"}
+
+**Scatter Plot of Matrices (SPLOM)**
+
+### Pre-processing
+
+Before proceeding to model training, I took three specific actions to ensure the proper conditioning of the data. First, I scaled the numerical attributes. The main objective of scaling the data was to address skewedness and data outliers. Second, I normalized the data to enhance the model performance. Normalization is critical to prevent any attributes with larger scales to dominates the model learning process. Lastly, I finished conditioning the data by downsampling it so all classes would end up with the same frequency as the minority class.
+
+```{r conditioning, fig.height=6,fig.width=10}
+
+df1[c(1:3)] <- scale(df1[c(1:3)])
+df1 <- normalize(df1)
+
+# set seed
+set.seed(1212)
+# down-sample entire data set
+df2 <- downSample(x=df1[c(-4)], y=df1$Class)
+```
+
+For duplication purposes, I utilized 10% of the conditioned data.
+
+```{r down_sample, fig.height=6,fig.width=10}
+#| echo: false
+#| output: false
+
+class_column <- "Class"
+# calculate the number of samples per class (10% of total observations)
+n_samples <- 0.10 * nrow(df2) / length(unique(df2[[class_column]]))
+# stratified sampling to ensure equal number of classes
+set.seed(12345)
+sampled_df <- df2 %>%
+  group_by(!!sym(class_column)) %>%
+  sample_n(size = n_samples) %>%
+  ungroup()
+
+# preview sampling
+# table(sampled_df[[class_column]])
+```
+
+```{r sampled_data}
+summary(sampled_df)
+```
+
+### Data Partitioning
+
+Post-conditioning of the data, I applied a train-test split method in preparation to properly evaluate the performance of the models. The idea here is to divide the dataset into three distinctive subsets, training, testing, and cross-validating, and observe how the model generalize across these.
+
+```{r data_split}
+
+# to create a 50-30-20 subsets
+set.seed(12345)
+# training set with 50% of the data
+trainIndex <- createDataPartition(sampled_df$Class, p = 0.50, list = FALSE)
+train <- sampled_df[trainIndex, ]
+# remaining 50%
+remaining <- sampled_df[-trainIndex, ]
+# test set (30%)
+testIndex <- createDataPartition(remaining$Class, p = 0.60, list = FALSE)
+test <- remaining[testIndex, ]
+# cross-validation (20%)
+crossval <- remaining[-testIndex, ]
+
+# preview of the partitions
+table(train$Class)
+table(test$Class)
+table(crossval$Class)
+```
+
+<br/>
+
+### Classification Models
+
+------------------------------------------------------------------------
+
+#### Conditional Inference Tree
+
+One of the implemented classification models was a conditional inference tree (CTREE). The CTREE method follows a “recursive partitioning framework” to split each evaluated class and “the outcome takes place based on the measured p-value of association between the observations” at hand. As an example of the steps taken for most of the models, here is a copy of the code and graphic.
+
+```{r ctree}
+
+set.seed(12345) 
+myFormula <- Class ~. 
+# start.time <- Sys.time()
+model <- partykit::ctree(myFormula, control=ctree_control(maxdepth= ), data=train)
+# end.time <- Sys.time()
+# time.taken <- end.time - start.time
+
+# train model
+# table(predict(model), train$Class, dnn=c("PREDICTED", "ACTUAL"))
+modelaccur <- sum(predict(model) == train$Class) / length(train$Class) 
+# prop.table(table(predict(model), train$Class, dnn=c("PREDICTED", "ACTUAL")))
+
+# test model
+model2 <- ctree(myFormula, data = test)
+# table (testPred2, test$Class, dnn=c("PREDICTED", "ACTUAL")) 
+testPred2 <- predict(model2, data = test, method="class") 
+model2accur <- sum(testPred2 == test$Class)/length(test$Class)
+# prop.table(table(predict(model2), test$Class, dnn=c("PREDICTED", "ACTUAL")))
+
+# cross-val model
+model3 <- ctree(myFormula, data = crossval)
+# table (testPred3, crossval$Class, dnn=c("PREDICTED", "ACTUAL"))
+testPred3 <- predict(model3, data = crossval, method="class") 
+model3accur <- sum(testPred3 == crossval$Class)/length(crossval$Class)
+# prop.table(table(predict(model3), crossval$Class, dnn=c("PREDICTED", "ACTUAL")))
+```
+
+For the CTREE depiction I used the partykit::ctree R package[@partykit]. Here's a glimpse of how the cross-validation model performs and shows the distribution of classes in the terminal nodes. The graphic greatly helps conceptualizing the model and provides a clearer image of the lateral deviations and status changes relationship.
+
+```{r ctree_plot,fig.height=8,fig.width=12}
+#| include: true
+
+plot(model3, type="extended", ep_args = list(justmin = .01),
+     drop_terminal=T, tnex= 1.3, gp=gpar(fontsize = 8, col="darkblue"),
+     inner_panel = node_inner(model, fill=c("white","green"), pval=T),
+     terminal_panel= node_barplot(model, fill=c(1:5), beside=T,
+                                  ymax=1.05, rot = 90, just = c(.95,.5),
+                                  ylines=T, widths = .90, gap=0.05, reverse=F, id=T),
+     margins = c(6,5, 5, 4), main ="Conditional Inference Tree\nLateral Adherence Status")
+```
+
+![](images/ctree_table.png)
+
+#### Naïve Bayes
+
+The second classification model –Naïve Bayes (NB)—follows Thomas Bayes’ theorem of probabilistic classification judging the relationship between the probabilities of different events and their conditional probabilities. Per this theorem, the data is used to fit the model, assuming “the encompassing predictors are independent of the target variable classes”[@naivebayes]. One note about NB was the capacity of the model to evaluate all the instances in a swiftly 1.60 seconds.
+
+![](images/nv_plot.png){width="460"}
+
+![](images/nb_table.png)
+
+#### Multiclass Support Vector Machine (SVM)
+
+The third model, a SVM was adapted using the one-versus-one approach, “C-classification” type, to assess the multiple classes within the observations. The kernel used for the calculation was a “radial”, the data was scaled, and the cost and gamma values were kept at default values with 10 and 0.1 respectively. It resulted in identifying 3,814 support vectors, reaching an overall accuracy, recall, precision, and F1 of 97%
+
+![](images/svm-m.png){width="466"}
+
+![](images/svm-m_table.png)
+
+#### Gradient Boosting Machine (GBM)
+
+The fourth predicted model is an adoption of the typical ensemble model of generalized boosted regression modeling known as Stochastic Gradient Boosting Machine. This model is particularly “known as one of the most powerful techniques for building predictive models”. Reportedly, GBM scopes optimal performance when dealing with significant disparity across observations and it is highly recommended to use it for anomaly detection cases. In essence, the GBM framework takes the error or loss, of the prior and employs it to adjust the weights of the sub-sequential trees, thus minimizing the follow-on errors.
+
+![](images/gbm.png){fig-align="left" width="503"}
+
+![](images/gbm_table.png)
+
+------------------------------------------------------------------------
+
+### Models Review
+
+At the end, all models were compared and evaluated for best performance. Although, all the models performed relatively well, there were unique traits to arrange these models in three groups. Case in point, top performers based on overall accuracy were the GBM, CTREE, and SVM-M. The second group included NB, and K-Nearest Neighbor (KNN). Finally, the third group with Recursive Partitioning and Regression Tree (RPART). The bellow image displays a comparison of models based on accuracy, and alternatively, the models' classification error metrics.
+
+![](images/overall_metrics.png){width="877"}
+
+<br/>
+
+#### Overall Performance Metrics
+
+Overall, four key metrics were taken in consideration, specificity, sensitivity, kappa, and F1 score. As displayed, the classification models graph portray how each model performed, underlining different alternatives to further develop in support of the main objective of auto-classifying in-flight aircraft lateral deviations. The champion in this occasion was GBM with the highest probabilities across the metrics.
+
+<br/>
+
+![](images/overall.png){width="884"}
+
+------------------------------------------------------------------------
+
+### Summary and Recommendations
+
+Essentially the project exposed a variety of features of importance regarding the examination of an aircraft lateral variability. In summary, deviation across some ARTCCs like ZLA and ZMA were more prevalent than others, particularly the ZAU or ZNY case. Also, the study demonstrated that the majority of the observations were within three standard deviations from the mean, indicating a consistency of data points across the distributions. Such insights were instrumental explaining inferences from the analysis across the large population. Moreover, the study validated the correlation and relative influence of the correction angle attribute \[originally named *Angle2NextFix*\] and the absolute weighted moving average of the lateral deviation \[known as *redLat*\] as a principal component or driver in the classification of the different lateral statuses.
+
+As mentioned, the completion of this assessment highlights some successes and potential benefits to consider in order to improve the FAA’s decision support tools. However, the shallow level of the study is implicit and further exploration of the data, and validation, is highly advisable and/or testing of the models against operational data. Additional features to correlate could add value to a final proposition and utility of the assessment. Also, other data like GPS data, lat/log coordinates, weather data, approved flight plan details or supplemental sensor measurements could maximize new insights.

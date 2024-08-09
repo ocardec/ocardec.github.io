@@ -1,8 +1,14 @@
 ---
 title: "Welcome To My Projects"
+description: "This is my portfolio as a data professional"
 author: "Oscar Cardec"
 date: "2024-07-01"
 image: giphysample.webp
+categories:
+  - "data science"
+  - "analytics"
+  - "ML"
+  - "AI"
 ---
 
 Welcome to my projects!

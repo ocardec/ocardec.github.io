@@ -42,7 +42,7 @@ The analyzed data comes for the UCI Machine Learning Repository[@d.campos2000a],
 -   CLASS - FHR pattern class code (1 to 10)
 -   NSP - fetal state class code (N=normal; S=suspect; P=pathologic)
 
-### EDA
+### Exploratory Data Analysis
 
 ```{r Requirements}
 #| echo: false

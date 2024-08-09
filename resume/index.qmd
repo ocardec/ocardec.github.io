@@ -8,14 +8,14 @@
 
 ## PROFESSIONAL SUMMARY
 
-Highly experienced Data Scientist and Machine Learning Engineer combining over 20 years of military experience and comprehensive knowledge across data analysis, machine learning, deep learning, and Generative AI. Specializing in data pipelines, data exploration, data pre-processing, data analysis, visualizations and data modeling with both structured and unstructured sources. Proven ability to translate stakeholder requirements and pain-points into actionable data science solutions. Expert in leading discussions across functions, building data science credibility, and mentoring teams in critical thinking, root cause analysis and problem-solving to enable decision-making at public and private sectors. Active security clearance and extensive experience supporting federal clients.
+Highly experienced Data Analyst and Machine Learning Specialist combining over 20 years of military experience and comprehensive knowledge across data analytics, machine learning, deep learning, and Generative AI. Specializing in data pipelines, data exploration, data pre-processing, data analysis, visualizations and data modeling with both structured and unstructured sources. Proven ability to translate stakeholder requirements and pain-points into actionable data science solutions. Expert in leading discussions across functions, building data science credibility, and mentoring teams in critical thinking, root cause analysis and problem-solving to enable decision-making at public and private sectors. Active security clearance and extensive experience supporting federal clients.
 
 ## CORE COMPETENCIES
 
-| • **Machine Learning:** Applied AI, predictive modeling, generative AI, and anomaly detection\\
-| • **Data Analysis:** Exploratory analysis, data cleaning, statistical inferences, and complex visualizations\\
-| • **Strategic Leadership:** Decision analysis, critical thinking, and project management\\
-| • **Technical Expertise:** Advanced proficiency in Python, R, Power BI, and cloud-based tools\\
+| • **Machine Learning:** Applied AI, predictive modeling, generative AI, and anomaly detection
+| • **Data Analysis:** Exploratory analysis, data cleaning, statistical inferences, and complex visualizations
+| • **Strategic Leadership:** Decision analysis, critical thinking, and project management
+| • **Technical Expertise:** Advanced proficiency in Python, R, Power BI, and cloud-based tools
 
 ## PROFESSIONAL EXPERIENCE
 

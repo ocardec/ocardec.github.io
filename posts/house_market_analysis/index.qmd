@@ -4,6 +4,8 @@ author: "Oscar Cardec"
 date: "7/21/2020"
 categories: [linear regression, house market]
 image: housing.jpeg
+draft: true
+draft-mode: gone
 page-layout: full
 
 ---

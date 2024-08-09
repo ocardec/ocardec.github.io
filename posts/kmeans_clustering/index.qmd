@@ -6,6 +6,7 @@ date: "9/4/2020"
 categories: [kmeans, clustering, classification]
 image: landsat.webp
 page-layout: full
+draft: true
 ---
 
 Report in-progress ...
