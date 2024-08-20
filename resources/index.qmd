@@ -1,7 +1,7 @@
 ---
 title: "Recommended Resources"
 description: "The following is a list of open-source and private resources to improve your data science and machine learning tradecraft. By no means it is an all-inclusive roster, instead some of the ones I have used before."
-listing: default
+listing: false
 ---
 
 <br/>

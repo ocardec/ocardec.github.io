@@ -1,7 +1,6 @@
 ---
 title: "Recommended Books"
 description: "Here is an opinionated list of great books for those interested in growing as data and machine learning professionals."
-listing: default
 ---
 
 ------------------------------------------------------------------------

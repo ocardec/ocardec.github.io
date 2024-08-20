@@ -26,7 +26,7 @@ As previously explained on [Aircraft's Lateral Deviation - Part I](../multi_mode
 
 if (!require("pacman")) install.packages("pacman")
 # load required libraries 
-pacman::p_load(pacman, arules, caret, datawizard, rio, tidyverse, naivebayes, psych, plyr, ggstatsplot, stats, corrplot, ggimage, ggthemes, ggfortify, forecast, scales, pracma, datasets, rsvg, hrbrthemes, e1071, tidyr, party, partykit, cvms, gbm, SmartEDA, randomForest, gridExtra, klaR, dlookr, flextable, gtsummary)
+pacman::p_load(pacman, arules, caret, datawizard, rio, tidyverse, naivebayes, psych, plyr, ggstatsplot, stats, corrplot, ggimage, ggthemes, ggfortify, forecast, scales, pracma, datasets, rsvg, hrbrthemes, e1071, tidyr, party, partykit, cvms, gbm, SmartEDA, randomForest, gridExtra, klaR, dlookr, flextable, gtsummary, dplyr)
 
 # file location
 mywd <- setwd("~/Documents/GitHub/ocquarto_portfolio/posts/multi_model_part2")

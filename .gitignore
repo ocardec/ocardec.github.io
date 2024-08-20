@@ -4,5 +4,5 @@
 .Ruserdata
 ocquarto_blog.Rproj
 ocquarto_portfolio.Rproj
-ignore_folder
+/ignore_folder/
 /.quarto/

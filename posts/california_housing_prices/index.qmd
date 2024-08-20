@@ -1,0 +1,297 @@
+---
+title: "House Market Analysis - Regression Model"
+author: "Oscar Cardec"
+date: "7/21/2022"
+categories: [random forest, regression]
+image: housing.jpeg
+page-layout: full
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+bibliography: references.bib
+---
+
+### Introduction
+
+Here is a descriptive analysis and regression modeling while attempting to build a comprehensive housing market study. The main goal is to extract valuable insights related to any association between sales prices, home values, or other property features and how these contribute to the overall value of a property.
+
+### Data Ingestion
+
+The ingested data pertains to properties found in a given California district and summary stats about them based on the 1990 census data. The data has been conditioned or curated and is available at [Kaggle](https://www.kaggle.com/datasets/camnugent/california-housing-prices). A list of attributes are ordered below.
+
+-   The dataset contains the following attributes:
+    -   `longitude`: Longitude of the house location.
+
+    -   `latitude`: Latitude of the house location.
+
+    -   `housing_median_age`: Median age of the houses.
+
+    -   `total_rooms`: Total number of rooms in a block.
+
+    -   `total_bedrooms`: Total number of bedrooms in a block.
+
+    -   `population`: Population of a block.
+
+    -   `households`: Number of households.
+
+    -   `median_income`: Median income of households in the block.
+
+    -   `median_house_value`: Median house value for households in the block (target variable).
+
+    -   `ocean_proximity`: Proximity of the block to the ocean.
+
+```{r ingest, fig.height=6, fig.width=10}
+#| warning: false
+#| echo: false
+#| fig-show: "hold"
+
+# requirements
+library(tidyverse)
+library(hrbrthemes)
+library(skimr)
+library(ggplot2)
+library(caret)
+library(corrplot)
+library(randomForest)
+library(plyr)
+
+# load the dataset
+mywd <- setwd("~/Documents/GitHub/ocquarto_portfolio/posts/california_housing_prices")
+sel_files <- list.files(path = mywd, pattern = "*.csv", full.names = FALSE)
+data <- ldply(sel_files, read_csv)
+```
+
+Broad overview of the data frame using `skim()`. Notice the number of missing values (207) across the `total_bedrooms` variable.
+
+```{r dataskim, fig.height=6, fig.width=10}
+#| warning: false
+
+skim(data, where(is.numeric))
+```
+
+------------------------------------------------------------------------
+
+### Exploratory Data Analysis
+
+#### Median House Values Distribution
+
+Frequency distribution of the the main dependable variable of "`median_house_value"` as given by the data steward website. Max number of bins limited to 50 for easy interpretation.
+
+```{r visual1, fig.height=6, fig.width=10}
+#| warning: false
+
+# Visual
+ggplot(data, aes(x = median_house_value)) +
+  geom_histogram(bins = 50, fill = "darkblue", col = "grey") +
+  labs(title = "Distribution of Median House Values", 
+       x = "Median House Value", 
+       y = "Frequency")+ 
+  theme_minimal()
+
+```
+
+As illustrated, mean value distribution is right-skewed as the observations are mainly concentrated on the figures below the median. This could indicate that the sampled data has clusters of highly priced properties but not uniformly.
+
+#### Correlation Matrix
+
+Notice the potential correlation across `median_house_value` and localization of the property as well as the representative `income` and `total_rooms`.
+
+```{r corr_matrix, fig.height=6, fig.width=10}
+#| warning: false
+
+numeric_cols <- data %>% 
+  select(-ocean_proximity)
+
+corr_matrix <- cor(numeric_cols)
+
+corrplot(corr_matrix, 
+         method = "circle", 
+         type = "upper", 
+         tl.cex = 0.9)
+```
+
+### Handling of Missing Values and Outliers
+
+As previously mentioned, the `total_bedrooms` variable is missing some values, so I went ahead and to preserve the rest of the values, used the median of the entire attribute to replace those lacking the rooms data point. Additionally, I capped the data at +/- 3 standard deviations from the mean to have a more symmetrical data set. Lastly, given that I'm using "randomForest" there was no need to normalize (scale/center) the data.
+
+```{r missing_capped, fig.height=6, fig.width=10}
+#| warning: false
+
+library(DMwR2)
+data$total_bedrooms[is.na(data$total_bedrooms)]<- median(data$total_bedrooms, na.rm =TRUE)
+
+cap_outliers <-function(x){
+  upper_limit <- mean(x)+3*sd(x)
+  lower_limit <- mean(x)-3*sd(x)
+  x <- ifelse(x > upper_limit, upper_limit, x)
+  x <- ifelse(x < lower_limit, lower_limit, x)
+  return(x)
+  }
+
+numeric_columns <- sapply(data,is.numeric)
+
+capped_data <- data
+capped_data[numeric_columns]<- lapply(capped_data[numeric_columns], cap_outliers)
+
+summary(capped_data)
+```
+
+### Encoding the Categorical Values
+
+My last conditioning step prior to fitting the model was encoding the categorical variable of `ocean_proximity` to maximize data understanding, calculation, and value extraction by the model on this given attribute.
+
+```{r encoding_cats, fig.height=6, fig.width=10}
+#| warning: false
+
+library(stats)
+clean_data <- capped_data %>%
+  dplyr::mutate(across(ocean_proximity, as.factor)) %>%
+  model.matrix(~ ocean_proximity -1, data = .) %>%
+  as.data.frame() %>%
+  bind_cols(capped_data)
+
+# extra step to ensure clear naming convention
+clean_data <- clean_data %>% 
+  dplyr::rename("ocean_proximity.1H.OCEAN" = "ocean_proximity<1H OCEAN",
+         "ocean_proximity.INLAND" = "ocean_proximityINLAND",
+         "ocean_proximity.ISLAND" = "ocean_proximityISLAND",
+         "ocean_proximity.NEAR.BAY" = "ocean_proximityNEAR BAY",
+         "ocean_proximity.NEAR.OCEAN" = "ocean_proximityNEAR OCEAN")
+
+# Remove the original categorical column
+clean_data <- clean_data %>% select(-ocean_proximity)
+```
+
+### Model Building and Diagnostics
+
+With a cleaner data set, I was ready to start running my linear model and study the quality of the product. As recorded below, I used **caret::createDataPartition** package function to split the train and test data subsets using a 80:20 ratio.
+
+#### Train - Test Split
+
+```{r traintestsplit, fig.height=6,fig.width=10}
+#| warning: false
+
+# data splitting
+set.seed(1212)
+trainIndex <- createDataPartition(clean_data$median_house_value, p = 0.8, list = FALSE)
+trainData <- clean_data[trainIndex, ]
+testData <- clean_data[-trainIndex, ]
+```
+
+#### Fit the Model
+
+Fit Random Forest model to predict median house value.
+
+```{r model_fit, fig.height=6,fig.width=10}
+#| warning: false
+
+library(randomForest)
+# Train a Random Forest model
+model <- randomForest(median_house_value ~ ., data = trainData, na.action = na.omit,
+                      importance = TRUE, mtry = 4)
+
+# Model summary
+print(model)
+```
+
+#### Observe Model Characteristics
+
+```{r modelviz, fig.height=8, fig.width=12}
+#| warning: false
+
+varImpPlot(model, main = "Variable Importance Plot", col = "darkblue")
+```
+
+### Model Assessment
+
+```{r predictions}
+
+# model prediction
+predicted_values <- predict(model, testData)
+```
+
+#### Actual vs. Predicted Viz
+
+```{r predicted_viz, fig.height=8, fig.width=10}
+#| warning: false
+
+library(plotly)
+pp <- testData %>% 
+  ggplot(aes(median_house_value, predicted_values)) +
+  labs(title = "California House Value Predicted vs. Actual", 
+       subtitle ="Median Housing Price at 95% CI")+
+  geom_point(alpha=0.4, col = "darkblue") + 
+  geom_abline(intercept = 0, slope = 1, color = "green", linetype = "dashed")+
+  xlab('Actual Value') +
+  ylab('Predicted Value')+
+  theme_ipsum()
+
+ggplotly(pp)
+```
+
+```{r rmse_results}
+#| warning: false
+
+# Calculate RMSE
+library(ModelMetrics)
+model_rmse <- rmse(predicted_values, testData$median_house_value)
+model_rmse
+```
+
+### Results
+
+The Root Mean Square Error (RMSE) resulted in \~47,500 which can be further improved using feature extraction, rebuilding, and training the model. Keep in mind that this standard deviation of the residuals represent the distance between the regression line and the data points.
+
+Suggestions for Improving the Model
+
+1.  **Feature Engineering**: Consider creating new features like room-to-population ratio or income categories.
+
+2.  **Hyperparameter Tuning**: Optimize the model’s parameters using grid search or cross-validation.
+
+3.  **Different Models**: Experiment with other models like Gradient Boosting or XGBoost.
+
+4.  **Ensemble Methods**: Combine predictions from multiple models to improve accuracy.
+
+5.  **Handling Outliers**: Investigate and address potential outliers in the data.
+
+------------------------------------------------------------------------
+
+### Extra Visualization
+
+The following depiction shows **population** per latitude/longitude and the respective median price of a property.
+
+```{r extramap, fig.height=12, fig.width=12}
+#| warning: false
+
+# Map depiction 
+library(maps)
+
+ca_df <- map_data("state") %>% filter(region =="california")
+counties <- map_data("county")
+ca_county <- subset(counties, region == "california")
+
+ca_base <- ggplot(data = ca_df, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.0) + 
+  geom_polygon(color = "black", fill = "gray")
+
+ca_map <- ca_base +
+  geom_polygon(data = ca_county, fill = NA, color = "gray") +
+  geom_polygon(color = "darkblue", fill = NA)  
+
+bb <- ca_map +
+  geom_jitter(data = clean_data, 
+              aes(x = longitude, alpha = 0.4,
+              y = latitude, size = population, 
+              col = median_house_value,
+              group = population))+
+  theme_minimal()+
+
+  labs(title = "Population Distribution", 
+       subtitle ="Median Housing Price",
+       col = "Median Price",
+       size = "Population",
+       x = "Longitude",
+       y = "Latitude")
+
+ggplotly(bb)
+
+```
