@@ -4,7 +4,7 @@ id: about-block
 image: img/my_image.jpeg
 about:
   template: trestles
-  image-width: 12em
+  image-width: 13em
   image-shape: round
   
   links:

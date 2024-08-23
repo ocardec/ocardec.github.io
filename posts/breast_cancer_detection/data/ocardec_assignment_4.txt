@@ -1,0 +1,205 @@
+# Assignment 4, Neural Networks in R
+# Written by Oscar Cardec
+# UMGC DATA630
+# Session: Fall 2020
+# Professor: Dr. Ami Gates
+
+#============================================================#
+# Classification of Breast Cancer Data Set                   #
+# Using Neural Networks Model                                #
+#============================================================#
+
+#Pre-requisites 
+library("tidyverse")
+
+# 1. Load dataset
+# Load & Read the data file.
+setwd("~/OneDrive/UMGC/DATA630/Week9")
+wdbc<-read.csv(file="wdbc.csv", head=TRUE, sep=",")
+str(wdbc)          # Review structure of the dataset
+summary(wdbc)      # Run the summary command 
+wdbc$ID <- NULL    # Exclusion of ID variable
+head(wdbc, 4)
+# Transform diagnosis values to factor
+wdbc$diagnosis <- factor(wdbc$diagnosis, levels = c("M", "B"), labels = c("1", "0")) 
+
+# 2. EDA
+# Stat descriptions of each Plane (I, II, III)
+library("psych")
+describe(wdbc[1:11])
+describe(wdbc[12:21])
+describe(wdbc[22:31])
+
+# Explore density of diagnosis across four variables 
+library(gridExtra)
+g1 <- ggplot(data = wdbc)+
+  theme_light()+
+  geom_density(mapping = aes(radius,  fill = diagnosis), col="darkgrey", show.legend = FALSE, alpha=0.6)
+g2 <- ggplot(data = wdbc)+
+  theme_light()+
+  geom_density(mapping = aes(area, fill = diagnosis), col="darkgrey", show.legend = TRUE, alpha=0.6)
+g3 <- ggplot(data = wdbc)+
+  theme_light()+
+  geom_density(mapping = aes(texture, fill = diagnosis), col="darkgrey", show.legend = FALSE, alpha=0.6)
+g4 <- ggplot(data = wdbc)+
+  theme_light()+
+  geom_density(mapping = aes(concave, fill = diagnosis), col="darkgrey", show.legend = TRUE, alpha=0.6)
+grid.arrange(arrangeGrob(g1,  g2,  g3, g4),  nrow=1)
+
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Test how the actual sample looks like
+set.seed(1234)
+ind <- sample(2, nrow(wdbc), replace = T, prob = c(1.0, 0.0))
+train.data <- wdbc[ind == 1, ]
+test.data <- wdbc[ind == 2, ]
+
+# Run the method on a training data
+library("party")
+library("partykit")
+myFormula<-diagnosis~.
+model <- ctree(myFormula, data = train.data)
+
+plot.new()
+plot(model, type="extended", ep_args = list(justmin =8), 
+     main ="Breast Cancer Data Preliminary Analysis", 
+     drop_terminal=F, tnex=1.5, 
+     gp=gpar(fontsize = 12, col="dark blue"),
+     inner_panel = node_inner(model, fill=c("white","cyan"), pval=T), 
+     terminal_panel=node_barplot(model, fill=c("darkred","darkgray"), beside=T, ymax=1, 
+                                 just = c(.95,.5), ylines=T, widths = 1.5, gap=0.05, reverse=F, id=T),
+     margins = c(2, 4, 4, 2))
+
+
+#*************************************************************************
+library("graphics")
+# Plot Plan I
+clrs <- c("darkred", "white")
+pairs(wdbc[2:11], fill=clrs, main = "Plane I Distributions", cex.main= 2, cex.labels = 2,
+      lower.panel = NULL, pch = 21, col="darkgrey", bg = clrs [unclass(wdbc$diagnosis)])
+par (xpd = T)
+legend (0.10, 0.01, horiz = TRUE, as.vector(unique(wdbc$diagnosis)),
+        fill=clrs, bty = "n")
+
+#*************************************************************************
+# Plane II
+clrs <- c("darkred", "white")
+pairs(wdbc[12:21], fill=clrs, main = "Plane II Distributions", cex.main= 2, cex.labels = 2,
+      lower.panel = NULL, pch = 21, col="darkgrey", bg = clrs [unclass(wdbc$diagnosis)])
+par (xpd = T)
+legend (0.10, 0.01, horiz = TRUE, as.vector(unique(wdbc$diagnosis)),
+        fill=clrs, bty = "n")
+#*************************************************************************
+
+# Plane III
+clrs <- c("darkred", "white")
+pairs(wdbc[22:31], fill=clrs, main = "Plane III Distributions", cex.main= 2, cex.labels = 2,
+      lower.panel = NULL, pch = 21, col="darkgrey", bg = clrs [unclass(wdbc$diagnosis)])
+par (xpd = T)
+legend (0.10, 0.01, horiz = TRUE, as.vector(unique(wdbc$diagnosis)),
+        fill=clrs, bty = "n")
+
+#=========================================================================
+# Diagnosis values converted to numeric type for accurate representation
+wdbc$diagnosis <- as.character(wdbc$diagnosis)
+wdbc$diagnosis <- as.numeric(wdbc$diagnosis)
+
+library("neuralnet")
+library("NeuralNetTools")
+
+#make sure the result is reproducible
+set.seed(1234)
+#split the data into a training and test set
+ind <- sample(3, nrow(wdbc), replace = TRUE, prob = c(0.70, 0.15, 0.15))
+train <- wdbc[ind == 1, ]
+test <- wdbc[ind == 2, ]
+QC <- wdbc[ind == 3, ]
+# Run the neuralnet command to build the model. 
+nn <- neuralnet(diagnosis ~.,
+                data = train, hidden = c(4,4),
+                lifesign = "minimal", linear.output = FALSE, err.fct = "sse", likelihood=TRUE)
+# plot the NN
+plot(nn,radius = 0.05, arrow.length = 0.16, intercept = TRUE,
+     intercept.factor = 0.025, information = TRUE, information.pos = 8,
+     col.entry.synapse = "black", col.entry = "maroon4", line_stag= 0.03,
+     col.hidden = "blue", col.hidden.synapse = "dimgrey",
+     col.out = "maroon4", col.out.synapse = "darkblue",
+     col.intercept = "red", fontsize = 10, dimension = 2,
+     show.weights = T)
+
+# Alternate display
+plotnet(nn, y_names = "Diagnosis", max_sp = TRUE,
+        pad_x=1, cex_val=.85, circle_col="grey95", circle_cex=7, bord_col="darkblue",
+        pos_col="blue", neg_col="red", alpha_val=0.6, line_stag= 0.03)
+
+#names command displays the available neural network properties
+attach(nn)
+names(nn)
+
+#Run the commands to display the network properties
+call                  # the command we ran to generate the model
+response[1:10]         # actual values of the dependent variable for first 10 records
+covariate [1:10,] # input variables that were used to build the model for first 10 records
+model.list            # list dependent and independent variables in the model
+err.fct               # the used error function ('sse' and 'ce' stands for the sum of squared errors and the cross-entropy )
+act.fct               # the activation function
+data                  # the data argument
+generalized.weights   # a list containing the generalized weights of the neural network for every repetition.
+net.result[[1]][1:10] # display the first 10 predicted probabilities
+weights               # network weights after the last method iteration
+startweights          # weights on the first method iteration
+result.matrix         # number of training steps, the error, and the weights
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Train dataset assessment
+library("Metrics")
+#Model evaluation; Round the predicted probabilities
+mypredict<-compute(nn, nn$covariate)$net.result
+mypredict<-apply(mypredict, c(1), round)
+length(mypredict)
+length(train$diagnosis)
+# confusion matrix for the training set
+n2<-(mypredict==train$diagnosis)
+table(mypredict[1:length(train$diagnosis)], train$diagnosis, dnn =c("Actual","Predicted"))
+accuracy(train$diagnosis, mypredict[1:length(train$diagnosis)]) #cross-entropy 
+
+# ROC Curve analysis of train dataset
+library(ROCR)
+pred <- compute(nn, nn$covariate)$net.result
+predObj <- prediction(pred[1:length(train$diagnosis)], train$diagnosis)
+rocObj <- performance(predObj, measure="tpr", x.measure="fpr")
+aucObj <- performance(predObj, measure = "auc")
+plot(rocObj,  main = "Train Data ROC Curve", cex.lab=1.25, cex.main = 1.5)
+text(.5, .5, paste("Area under the curve:", round(aucObj@y.values[[1]], 4)), 
+     col = "darkred", cex = 1.25)
+
+#***************************************************************
+# Test dataset assessment
+names(test)
+#Model evaluation; Round the predicted probabilities
+testPred <- compute(nn, test[,1:31])$net.result
+testPred <- apply(testPred, c(1), round)
+# confusion matrix for the test set
+n3 <- (testPred==test$diagnosis)
+table(testPred[1:length(test$diagnosis)], test$diagnosis, dnn =c("Predicted", "Actual"))
+accuracy(testPred[1:length(test$diagnosis)], test$diagnosis) #cross-entropy 
+
+#===============================================================
+# QC dataset assessment
+names(QC)
+#Model evaluation; Round the predicted probabilities
+QC_chk <- compute(nn, QC[, 1:31])$net.result
+QC_chk <- apply(QC_chk, c(1), round)
+# confusion matrix for the test set
+n4<-(QC_chk==QC$diagnosis)
+table(QC_chk[1:length(QC$diagnosis)], QC$diagnosis, dnn =c("Predicted", "Actual"))
+accuracy(QC_chk[1:length(QC$diagnosis)], QC$diagnosis) #cross-entropy 
+#===============================================================
+mean(n2)
+mean(n3)
+mean(n4)
+
+# Workspace Clean up
+rm(list=ls())
+
+
+

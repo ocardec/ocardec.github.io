@@ -1,0 +1,380 @@
+---
+title: "Cancerous Cells Classification - Neural Network"
+description: "Malignant cells classification across digitized images of fine needle aspirate (FNA) of a breast mass 3-dimensional fragmentated samples"
+author: "Oscar Cardec"
+date: "06/21/2020"
+categories: [neural network, classification, pca, ctree, rocr, splom]
+image: img/cyber_ribbon.jpeg
+page-layout: full
+freeze: true
+code-block-bg: true
+code-block-border-left: "#31BAE9"
+bibliography: references.bib
+editor_options: 
+  chunk_output_type: inline
+---
+
+### Introduction
+
+Breast cancer is “the most common cause of cancer deaths among women worldwide”. In the United States, breast cancer is second to lung cancer related deaths, making it a national health critical issue. Statistical facts show breast cancer as the most frequently diagnosed cancer in women in 140 out of 184 countries. Key to survival and remission of breast cancer is closely linked with early detection and intervention.[@henderson2015].
+
+Early signs of irregular cells growth are detected by sampling and analyzing nuclear changes and parameter using diagnostic tools. The results of these nuclear morphometry tests are evaluated for structural deviations, which are representative of cancer diagnosis.[@narasimha2013] Now, considering the significance in accuracy of these evaluations, one may question how the medical industry uses machine learning models like neural networks to augment diagnosis and judgement of such vital medical assessments.
+
+The following is post-study report of numerous breast cancer preventive screenings, scrutinizing cell nuclei parameters in order to classify the specimens as either malignant or benign. The data have been previously categorized, thus, the intent here is to employ a neural network methodology to replicate this categorization and measure the algorithm’s effectiveness supporting medical professionals in the identification and early detection of breast carcinoma.
+
+![](img/bcancerdetection.jpeg){fig-align="center" width="300"}
+
+```{r requirements}
+#| warning: false
+#| echo: false
+#| include: false
+
+rm(list = ls(all.names = TRUE))
+gc()
+
+# requirements
+library(caret)
+library(factoextra)
+library(FactoMineR)
+library(graphics) 
+library(gridExtra)
+library(hrbrthemes)
+library(Metrics)
+library(neuralnet)
+library(NeuralNetTools)
+library(party)
+library(partykit)
+library(psych)
+library(ROCR)
+library(skimr)
+library(tidyverse)
+
+setwd("~/Documents/GitHub/ocquarto_portfolio/posts/breast_cancer_detection")
+
+# data ingest
+url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
+data <- read.csv(url, header = FALSE)
+```
+
+### Data
+
+The employed data, **Breast Cancer Wisconsin - Diagnostic**,comes from the UCI Machine Learning Repository. The multivariate set contains 569 instances and 32 attributes as described bellow. As previously stated, the data set features quantitative observations representative of the images obtained by means of a fine needle aspirate (FNA). These digitized samples were studied, measured and recorded, ultimately enabling the classification of every instance as malignant or benign. Essentially, there is a total of 10 real-value features per cell, however, given the 3-dimensional fragmentation of each cell sampling, it produces a total of 30 observations across 3 planes.[@williamwolberg1993]
+
+-   Variables list across each plane
+    -   1 - **`ID Name`** :: Identification number of the sample
+
+    -   2 - **`Diagnosis`** :: Dependable variable label. M = Malignant, B = Benignant
+
+    -   3 - Feature_1 **`Radius`** :: Mean of distances from center to points on the perimeter
+
+    -   4 - Feature_2 **`Texture`** :: Standard deviation of gray-scale values
+
+    -   5 - Feature_3 **`Perimeter`** ::
+
+    -   6 - Feature_4 **`Area`** ::
+
+    -   7 - Feature_5 **`Smoothness`** :: Local variation in radius lengths
+
+    -   8 - Feature_6 **`Compactness`** :: Perimeter\^2 / Area - 1.0
+
+    -   9 - Feature_7 **`Concavity`** :: Severity of concave portions of the contour
+
+    -   10 - Feature_8 **`Concave Points`** :: Number of concave portions of the contour
+
+    -   11 - Feature_9 `Symmetry` ::
+
+    -   12 - Feature_10 `Fractal Dimension` :: Coastline approximation - 1
+
+```{r preprocess}
+#| warning: false
+#| echo: false
+
+# update column names
+colnames(data) <- c("ID", "Diagnosis", paste0("Feature_", 1:30))
+df <- data |> select(-ID) # drop ID
+```
+
+### Exploratory Data Analysis
+
+> Basic descriptive statistics of the data set.
+
+```{r data_summary, fig.width=5, fig.height=8}
+
+# sample of statistical summary - Plane 1
+describe(df[1:10], interp = TRUE, ranges = FALSE)
+```
+
+> Density exploration of diagnosis across four specific variables: `radius`, `area`, `texture`, and `concave`
+
+```{r density_displays, fig.width=10, fig.height=8}
+#| warning: false
+
+# Explore density 
+g1 <- ggplot(data = df)+
+  theme_minimal()+
+  geom_density(mapping = aes(Feature_1,  fill = Diagnosis), col="darkgrey", show.legend = FALSE, alpha=0.5)+ 
+  labs(title = "Density of Diagnosis per Attribute | Red = Benignant, Blue = Malignant", y = " ", x = "Radius")
+
+g2 <- ggplot(data = df)+
+  theme_minimal()+
+  geom_density(mapping = aes(Feature_2, fill = Diagnosis), col="darkgrey", show.legend = FALSE, alpha=0.5)+ 
+  labs(title = "", y = " ", x = "Texture")
+
+g3 <- ggplot(data = df)+
+  theme_minimal()+
+  geom_density(mapping = aes(Feature_4, fill = Diagnosis), col="darkgrey", show.legend = FALSE, alpha=0.5)+ 
+  labs(title = "", y = " ", x = "Area")
+
+g4 <- ggplot(data = df)+
+  theme_minimal()+
+  geom_density(mapping = aes(Feature_7, fill = Diagnosis), col="darkgrey", show.legend = FALSE, alpha=0.5)+ 
+  labs(title = "", y = " ", x = "Concavity")
+
+grid.arrange(arrangeGrob(g1,  g2,  g3, g4),  nrow=1)
+```
+
+Key insight, these density plots are useful alternatives illustrating continuous data point. The selected variables are just examples of what can swiftly be illustrated to identify potential relationships between the feature and dependent variable.
+
+### Pre-Visualization of Data
+
+Here I use a conditional inference tree to estimate relationships across the data and how its recursively partitioned by the algorithm criteria. The main intent here is to have an idea on what to expect regarding the classification of this data set.
+
+```{r pre_viz, fig.height=8, fig.width=12}
+
+# mutate diagnosis character to numeric
+df <- df |> 
+  mutate(Diagnosis = ifelse(Diagnosis == "M", 1, 0)) 
+
+# CTREE model and plot
+model <- ctree(Diagnosis ~., data = df)
+plot(model, type="extended", ep_args = list(justmin=8), 
+     main="Breast Cancer | Preliminary Analysis",
+     drop_terminal=FALSE, tnex=1.5, 
+     gp = gpar(fontsize = 12, col="darkblue"),
+     inner_panel = node_inner(model, fill=c("white","green"), pval=TRUE), 
+     terminal_panel=node_barplot(model, fill=rev(c("darkred","lightgrey")), beside=TRUE, ymax=1.0, 
+                                 just = c(0.95,0.5), ylines=TRUE, widths = 1.0, gap=0.05, 
+                                 reverse=FALSE, id=TRUE)
+     )
+```
+
+#### Scatterplot of Matrix (SPLOM)
+
+This scatterplox matrix portraits immediate correlation between the included variables and possible multicollinearity among these. The selected features were limited to the first plane only (items 1 to 10). The other two planes include similar features. My immediate take was to consider a method for dimensionality reduction even when considering a neural network classification model.
+
+<br/>
+
+```{r splom, fig.height=8, fig.width=12}
+#| warning: false
+
+# Plot Plane I
+clrs <- c("darkred", "lightgrey")
+
+pairs(df[1:11], fill=clrs, main = "Plane I - Matrix of Scatterplots", 
+      cex.main= 2.0, cex.labels = 1.0, lower.panel = NULL, pch = 21, 
+      col="grey", bg = clrs [unclass(df$Diagnosis)])
+
+par (xpd = TRUE)
+
+legend (0.10, 0.01, horiz = TRUE, as.vector(unique(df$Diagnosis)), fill=clrs, bty = "n")
+
+```
+
+### Dimensionality Reduction
+
+As defined, the purpose of dimensionality reduction is to find a method that can represents a given data set using a smaller number of features but still containing the original data's properties. I know there are different methods to accomplish this, case in point, LDA, PCa, t-SNE, K-NN, UMAP, etc., but I ultimately decided to use PCA for feature extraction. The following steps illustrate how the method identifies eigenvector of largest eigenvalues of across the covariance matrix. As a result, I create a sub-set of the data using these variables with maximum influence on variance.
+
+```{r pca, fig.width=7, fig.height=5}
+#| warning: false
+
+# pca of original data
+res.pca <- PCA(df, scale.unit = TRUE, graph = FALSE, ncp = 4)
+eig.val <- get_eigenvalue(res.pca)
+var <- get_pca_var(res.pca)
+
+# Color by cos2 values: quality on the factor map
+fviz_pca_var(res.pca, col.var = "contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE 
+             )
+```
+
+### Sub-selected Features
+
+Here's my source code to create a subset based on the PCA, followed by conditioning the target variable as a factor for down-sampling purposes. The down-sampling approach was ensure an equally number of target outcomes and avoiding any model disposition towards one way or the other. Completed the down-sampling, I scale and centered the data to maximize model performance.
+
+```{r datasubset}
+
+# selection of principal components 
+pdf <- df |> 
+  select(Diagnosis, Feature_1, Feature_2, Feature_3, Feature_4, Feature_6, Feature_7, Feature_8,
+         Feature_10, Feature_11, Feature_13, Feature_14, Feature_16, Feature_18, Feature_20,
+         Feature_21, Feature_23, Feature_24, Feature_26, Feature_27, Feature_28,
+         Feature_30
+         )
+
+# mutating as a factor for downsampling 
+pdf <- pdf |> 
+  dplyr::mutate(Diagnosis = as.factor(Diagnosis))
+
+# class definition
+target <- "Diagnosis"
+
+# downsampling
+set.seed(12345)
+downsampled_df <- downSample(x = pdf[, colnames(pdf) != target], y = pdf[[target]])
+downsampled_df <- cbind(downsampled_df, downsampled_df$Class)
+colnames(downsampled_df)[ncol(downsampled_df)] <- target
+
+# subset, mutate, and scale
+df2 <- pdf 
+df2 <- df2 |> 
+  mutate(Diagnosis = as.character(Diagnosis),
+         Diagnosis = as.numeric(Diagnosis))
+df2[, -1] <- scale(df2[, -1])
+```
+
+> Final summary statistics across the data set.
+
+<br/>
+
+```{r skim}
+#| echo: false
+
+skim(df2)
+```
+
+> Visualization of variables as defined by the PCA across the first and second dimensions.
+
+<br/>
+
+```{r subset_fviz, fig.width=7, fig.height=5}
+#| warning: false
+
+# pca of subset data
+res.pca <- PCA(df2, scale.unit = FALSE, graph = FALSE, ncp =4)
+eig.val <- get_eigenvalue(res.pca)
+var <- get_pca_var(res.pca)
+
+# Color by cos2 values: quality on the factor map
+fviz_pca_var(res.pca, col.var = "contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE 
+             )
+```
+
+### Data Partitioning
+
+```{r traintestsplit, fig.width=7, fig.height=5}
+#| warning: false
+
+set.seed(12345)
+
+# splitting  
+ind <- sample(1:3, nrow(df2), replace=TRUE, prob=c(0.50, 0.25, 0.25))
+trainData <- df2[ind == 1, ]
+testData <- df2[ind == 2, ]
+xvalData <- df2[ind == 3, ]
+```
+
+### Model Training and Visualization
+
+Training of the neural network using the R library of `neuralnet`. This poweful algorithm "is based on the resilient backpropagation without weight backtracking and additionally modifies one learning rate, either the learningrate associated with the smallest absolute gradient (sag) or the smallest learningrate (slr) itself. The learning rates in the grprop algorithm are limited to the boundaries defined in learningrate.limit."[@neuralnet]
+
+```{r nnplot, fig.height=10, fig.width=12}
+#| warning: false
+
+# neuralnet 
+nn <- neuralnet(Diagnosis ~., data = trainData, hidden = c(3),
+                lifesign = "minimal", linear.output = FALSE, likelihood=TRUE
+                # act.fct = "tanh", err.fct = "sse"
+                )
+
+# plot model
+plot(nn, radius = 0.03, arrow.length = 0.16, intercept = TRUE,
+     intercept.factor = 0.2, information = TRUE, information.pos = 8,
+     col.entry.synapse = "black", col.entry = "maroon4", line_stag= 0.1,
+     col.hidden = "darkblue", col.hidden.synapse = "dimgrey",
+     col.out = "green", col.out.synapse = "blue",
+     col.intercept = "red", fontsize = 9, dimension = 2,
+     show.weights = TRUE, rep = "best")
+```
+
+#### Model's Evaluation
+
+Observation & Notes \| Section **in-progress ...**
+
+-   Approach
+    -   Training
+
+    -   Testing
+
+    -   Cross-validation
+
+```{r nn_properties}
+#| include: false
+#| warning: false
+
+# preview properties
+# print(names(nn))
+```
+
+```{r cm_train}
+
+# model evaluation
+mypredict <- neuralnet::compute(nn, nn$covariate)$net.result
+mypredict <- apply(mypredict, c(1), round)
+# confusion matrix - training set
+print(table(mypredict[1:length(trainData$Diagnosis)], trainData$Diagnosis, dnn =c("Actual","Predicted")))
+# accuracy(trainData$Diagnosis, mypredict[1:length(trainData$Diagnosis)]) #cross-entropy 
+```
+
+```{r cm_test}
+
+# model evaluation
+testPred <- neuralnet::compute(nn, testData[,1:22])$net.result
+testPred <- apply(testPred, c(1), round)
+# confusion matrix - test set
+print(table(testPred[1:length(testData$Diagnosis)], testData$Diagnosis, dnn =c("Actual", "Predicted")))
+# accuracy(testPred[1:length(testData$Diagnosis)], testData$Diagnosis) #cross-entropy 
+```
+
+```{r cm_xval}
+
+# model evaluation
+xvalPred <- neuralnet::compute(nn, xvalData[,1:22])$net.result
+xvalPred <- apply(xvalPred, c(1), round)
+# confusion matrix - xval set
+print(table(xvalPred[1:length(xvalData$Diagnosis)], xvalData$Diagnosis, dnn =c("Actual", "Predicted")))
+# accuracy(xvalPred[1:length(xvalData$Diagnosis)], xvalData$Diagnosis) #cross-entropy 
+```
+
+#### Mean Scores Comparison 
+
+Observation & Notes \| Section **in-progress ...**
+
+```{r mean_compare}
+
+n2 <- (mypredict == trainData$Diagnosis)
+n3 <- (testPred == testData$Diagnosis)
+n4 <- (xvalPred == xvalData$Diagnosis)
+
+mean(n2); mean(n3); mean(n4)
+```
+
+#### ROC Curve
+
+Observation & Notes \| Section **in-progress ...**
+
+```{r roc_curve, fig.height=5,fig.width=8}
+
+# ROC curve analysis 
+pred <- neuralnet::compute(nn, nn$covariate)$net.result
+predObj <- prediction(pred[1:length(xvalData$Diagnosis)], xvalData$Diagnosis)
+rocObj <- performance(predObj, measure="tpr", x.measure="fpr")
+aucObj <- performance(predObj, measure = "auc")
+plot(rocObj,  main = "ROC Curve", cex.lab=1.25, cex.main = 1.5, col = "blue")
+text(.75, .25, paste("Area under the curve:", round(aucObj@y.values[[1]], 4)),
+     col = "darkred", cex = 1.25)
+
+```
