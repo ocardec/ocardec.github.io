@@ -11,18 +11,22 @@ about:
     - icon: twitter
       text: Twitter
       href: https://twitter.com/CardO37474
+      target: _blank
     - icon: github
       text: Github
       href: https://github.com/ocardec
+      target: _blank
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/oscarcardec/
+      target: _blank
     - icon: envelope
       text: Email
       href: "mailto:ocmain@gocardec.com"  
     - icon: file-person
       text: Resume
       href: resume/index.qmd
+      target: _blank
 ---
 
 ## Welcome to my Portfolio!

@@ -29,10 +29,13 @@ website:
     right:
       - icon: folder-symlink
         href: https://meritpages.com/ocardec
+        target: _blank
       - icon: twitter
         href: https://twitter.com/CardO37474
+        target: _blank
       - icon: linkedin
         href: https://www.linkedin.com/in/oscarcardec/
+        target: _blank
       - icon: envelope
         aria-label: email
         href: "mailto:ocmain@gocardec.com"  
@@ -43,7 +46,7 @@ website:
     type: textbox
   page-footer: 
     left: |
-      <span class="faux-block">&#169; Copyright 2024 Cardec Analytics</span>
+      <span class="faux-block">&#169; Copyright 2024, Cardec Analytics</span>
     right: |
       <span class="faux-block">Last Update: Aug 2024</span>
 
@@ -63,9 +66,10 @@ format:
   html:
     page-layout: full
     fontsize: 1.1em
-    theme: 
-      - Flatly
-      - html/styles.scss
+    theme:
+      light: flatly
+      dark: darkly
+    css: html/styles.scss
     toc: false
     code-link: true
     anchor-sections: true

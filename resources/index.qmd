@@ -14,71 +14,71 @@ listing: false
 
 ------------------------------------------------------------------------
 
--   [The Algorithms](https://the-algorithms.com)
--   [Data Science Resource Hub - SAS](https://www.sas.com/en_us/training/academy-data-science/data-science-resources.html#data-scientist-learning-journey)
--   [Data Science Central](https://www.datasciencecentral.com)
--   [Data, AI & Machine Learning](https://sloanreview.mit.edu/topic/data-ai-machine-learning/)
--   [Storytelling with Data](https://www.storytellingwithdata.com/chart-guide)
+-   [The Algorithms](https://the-algorithms.com){target="_blank"}
+-   [Data Science Resource Hub - SAS](https://www.sas.com/en_us/training/academy-data-science/data-science-resources.html#data-scientist-learning-journey){target="_blank"}
+-   [Data Science Central](https://www.datasciencecentral.com){target="_blank"}
+-   [Data, AI & Machine Learning](https://sloanreview.mit.edu/topic/data-ai-machine-learning/){target="_blank"}
+-   [Storytelling with Data](https://www.storytellingwithdata.com/chart-guide){target="_blank"}
 
 ### Courses
 
 ------------------------------------------------------------------------
 
--   [Introduction to Data Science \| edx IBM](https://www.edx.org/learn/data-science/ibm-introduction-to-data-science?index=product&search_index=product&webview=false&campaign=Introduction+to+Data+Science&source=edX&product_category=course&placement_url=https%3A%2F%2Fwww.edx.org%2Flearn%2Fdata-analysis)
--   [The Data Scientist's Toolbox](https://www.coursera.org/learn/data-scientists-tools#modules)
--   [Analyze Data with Pandas](https://www.codecademy.com/learn/paths/analyze-data-with-python)
--   [Professional Certificate in Data Science \| edx Harvard](https://www.edx.org/certificates/professional-certificate/harvardx-data-science?index=product&search_index=product&webview=false&campaign=Data++Science&source=edX&product_category=professional-certificate&placement_url=https%3A%2F%2Fwww.edx.org%2Flearn%2Fdata-analysis)
--   [Applied Data Science Program: Leveraging AI for Effective Decision-Making \| MiT](https://professional-education-gl.mit.edu/mit-applied-data-science-course?&utm_source=google&utm_medium=search&utm_campaign=ADSB_Int_Search_Program_Broad_US-E_NewLP&adgroup_id=152133034790&campaign_id=20012657719&Keyword=data%20scientist%20program&placement=&utm_content=655818703904&utm_target=kwd-57785127948&gclid=CjwKCAjwscGjBhAXEiwAswQqNFgWeE1nquYWCBJV8r_WHNmkgvqUGVqmjMcVyufULcz24lIdp3U37xoC6gIQAvD_BwE)
--   [Deep Learning \| Deeplizard](https://deeplizard.com/courses)
--   [Deep Learning Toolbox \| MathWorks](https://www.mathworks.com/help/deeplearning/examples.html?s_tid=ans_recom_nba-get)
+-   [Introduction to Data Science \| edx IBM](https://www.edx.org/learn/data-science/ibm-introduction-to-data-science?index=product&search_index=product&webview=false&campaign=Introduction+to+Data+Science&source=edX&product_category=course&placement_url=https%3A%2F%2Fwww.edx.org%2Flearn%2Fdata-analysis){target="_blank"}
+-   [The Data Scientist's Toolbox](https://www.coursera.org/learn/data-scientists-tools#modules){target="_blank"}
+-   [Analyze Data with Pandas](https://www.codecademy.com/learn/paths/analyze-data-with-python){target="_blank"}
+-   [Professional Certificate in Data Science \| edx Harvard](https://www.edx.org/certificates/professional-certificate/harvardx-data-science?index=product&search_index=product&webview=false&campaign=Data++Science&source=edX&product_category=professional-certificate&placement_url=https%3A%2F%2Fwww.edx.org%2Flearn%2Fdata-analysis){target="_blank"}
+-   [Applied Data Science Program: Leveraging AI for Effective Decision-Making \| MiT](https://professional-education-gl.mit.edu/mit-applied-data-science-course?&utm_source=google&utm_medium=search&utm_campaign=ADSB_Int_Search_Program_Broad_US-E_NewLP&adgroup_id=152133034790&campaign_id=20012657719&Keyword=data%20scientist%20program&placement=&utm_content=655818703904&utm_target=kwd-57785127948&gclid=CjwKCAjwscGjBhAXEiwAswQqNFgWeE1nquYWCBJV8r_WHNmkgvqUGVqmjMcVyufULcz24lIdp3U37xoC6gIQAvD_BwE){target="_blank"}
+-   [Deep Learning \| Deeplizard](https://deeplizard.com/courses){target="_blank"}
+-   [Deep Learning Toolbox \| MathWorks](https://www.mathworks.com/help/deeplearning/examples.html?s_tid=ans_recom_nba-get){target="_blank"}
 
 ### Projects & Books
 
 ------------------------------------------------------------------------
 
--   [Big Book of R](https://www.bigbookofr.com)
+-   [Big Book of R](https://www.bigbookofr.com){target="_blank"}
 -   [Data Science on the GCP](https://www.oreilly.com/library/view/data-science-on/9781491974551/)
--   [100+ Python projects](https://thecleverprogrammer.com/2021/01/14/python-projects-with-source-code/)
--   [R Books Collection](https://www.rstudio.com/resources/books/)
--   [40+ Modern ML Tutorials](https://www.datasciencecentral.com/40-tutorials-covering-all-aspects-of-machine-learning/)
+-   [100+ Python projects](https://thecleverprogrammer.com/2021/01/14/python-projects-with-source-code/){target="_blank"}
+-   [R Books Collection](https://www.rstudio.com/resources/books/){target="_blank"}
+-   [40+ Modern ML Tutorials](https://www.datasciencecentral.com/40-tutorials-covering-all-aspects-of-machine-learning/){target="_blank"}
 
 ### Visualization Package/Libraries
 
 ------------------------------------------------------------------------
 
--   [matplotlib](https://matplotlib.org/stable/)
--   [ggplot2](https://exts.ggplot2.tidyverse.org/gallery/)
--   [seaborn](https://seaborn.pydata.org)
--   [Google Charts](https://developers.google.com/chart/interactive/docs/gallery)
--   [Grafana](https://grafana.com/grafana/)
--   [Datawrapper](https://www.datawrapper.de)
--   [Visual Cinnamon](https://www.visualcinnamon.com/portfolio/)
+-   [matplotlib](https://matplotlib.org/stable/){target="_blank"}
+-   [ggplot2](https://exts.ggplot2.tidyverse.org/gallery/){target="_blank"}
+-   [seaborn](https://seaborn.pydata.org){target="_blank"}
+-   [Google Charts](https://developers.google.com/chart/interactive/docs/gallery){target="_blank"}
+-   [Grafana](https://grafana.com/grafana/){target="_blank"}
+-   [Datawrapper](https://www.datawrapper.de){target="_blank"}
+-   [Visual Cinnamon](https://www.visualcinnamon.com/portfolio/){target="_blank"}
 
 ### BI Tools & Platforms
 
 ------------------------------------------------------------------------
 
--   [KNIME](https://www.knime.com/knime-analytics-platform)
--   [SAS Enterprise Miner](https://www.sas.com/en_us/software/enterprise-miner.html)
--   [IBM Cognos Analytics](https://www.ibm.com/products/cognos-analytics)
--   [Splunk MLTK](https://splunkbase.splunk.com/app/2890)
--   [Shiny](https://shiny.posit.co/?_gl=1*ndp1ah*_ga*MTMyMDE5NzEyMi4xNjg1MDMwNzUx*_ga_2C0WZ1JHG0*MTY4NTE1Njk4My40LjEuMTY4NTE1NzMxNi4wLjAuMA..)
--   [Mode](https://mode.com/platform)
--   [OSF](https://osf.io)
--   [Quarto](https://quarto.org)
--   [RStudio](https://posit.co/products/open-source/rstudio/)
--   [Anaconda](https://www.anaconda.com/products/data-science-ai-workbench)
--   [Orange](https://orangedatamining.com)
--   [Spyder](https://www.spyder-ide.org)
--   [Jupyter](https://jupyter.org)
+-   [KNIME](https://www.knime.com/knime-analytics-platform){target="_blank"}
+-   [SAS Enterprise Miner](https://www.sas.com/en_us/software/enterprise-miner.html){target="_blank"}
+-   [IBM Cognos Analytics](https://www.ibm.com/products/cognos-analytics){target="_blank"}
+-   [Splunk MLTK](https://splunkbase.splunk.com/app/2890){target="_blank"}
+-   [Shiny](https://shiny.posit.co/?_gl=1*ndp1ah*_ga*MTMyMDE5NzEyMi4xNjg1MDMwNzUx*_ga_2C0WZ1JHG0*MTY4NTE1Njk4My40LjEuMTY4NTE1NzMxNi4wLjAuMA..){target="_blank"}
+-   [Mode](https://mode.com/platform){target="_blank"}
+-   [OSF](https://osf.io){target="_blank"}
+-   [Quarto](https://quarto.org){target="_blank"}
+-   [RStudio](https://posit.co/products/open-source/rstudio/){target="_blank"}
+-   [Anaconda](https://www.anaconda.com/products/data-science-ai-workbench){target="_blank"}
+-   [Orange](https://orangedatamining.com){target="_blank"}
+-   [Spyder](https://www.spyder-ide.org){target="_blank"}
+-   [Jupyter](https://jupyter.org){target="_blank"}
 
 ### Community
 
 ------------------------------------------------------------------------
 
--   [Data Science Hangout](https://posit.co/data-science-hangout/) by Posit
--   [The Data Canteen](https://vetsindatascience.com/the-data-canteen) by Ted Hallum
--   [Data Humans Podcast](https://libbyheeren.com/podcast.html) by Libby Heeren
--   [Data Science Leaders Podcast](https://domino.ai/data-science-leaders-podcast) by Kjell Carlsson
--   [Data Skeptic Podcast](https://dataskeptic.com) by Kyle Polich
--   [Super Data Science Podcast](https://www.superdatascience.com/podcast/) by Jon Krohn
+-   [Data Science Hangout](https://posit.co/data-science-hangout/){target="_blank"} by Posit
+-   [The Data Canteen](https://vetsindatascience.com/the-data-canteen){target="_blank"} by Ted Hallum
+-   [Data Humans Podcast](https://libbyheeren.com/podcast.html){target="_blank"} by Libby Heeren
+-   [Data Science Leaders Podcast](https://domino.ai/data-science-leaders-podcast){target="_blank"} by Kjell Carlsson
+-   [Data Skeptic Podcast](https://dataskeptic.com){target="_blank"} by Kyle Polich
+-   [Super Data Science Podcast](https://www.superdatascience.com/podcast/){target="_blank"} by Jon Krohn

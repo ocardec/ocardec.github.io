@@ -9,3 +9,7 @@ title-block-banner: false
 
 execute:
   knitr: true
+  
+theme:
+  light: flatly
+  dark: darkly
