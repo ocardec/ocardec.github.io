@@ -24,7 +24,6 @@ website:
         href: resources/index.qmd
       - text: "Books"
         href: books/index.qmd
-        
     # social media handles
     right:
       - icon: folder-symlink
@@ -46,9 +45,9 @@ website:
     type: textbox
   page-footer: 
     left: |
-      <span class="faux-block">&#169; Copyright 2024, Cardec Analytics</span>
+      <span class="faux-block">&#169; Copyright 2024 Cardec Solutions</span>
     right: |
-      <span class="faux-block">Last Update: Aug 2024</span>
+      <span class="faux-block">Aug 2024</span>
 
 project:
   type: website
