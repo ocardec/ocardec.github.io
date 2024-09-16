@@ -2,7 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
+
 ocquarto_blog.Rproj
 ocquarto_portfolio.Rproj
-/ignore_folder/
+
+/img/
 /.quarto/

@@ -5,11 +5,11 @@ website:
   reader-mode: true
   description: " " # a brief slogan (optional)
   image: img/my_image.jpeg
-  favicon: img/ocfavicon2.jpg
+  favicon: img/ocfavicon3.png
   navbar:
     pinned: true
     collapse: true
-    logo: img/ocfavicon2.jpg
+    logo: img/ocfavicon3.png
     # sub-pages
     left:
       - text: "Home"
@@ -26,7 +26,7 @@ website:
         href: books/index.qmd
     # social media handles
     right:
-      - icon: folder-symlink
+      - icon: award
         href: https://meritpages.com/ocardec
         target: _blank
       - icon: twitter
@@ -35,7 +35,7 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/oscarcardec/
         target: _blank
-      - icon: envelope
+      - icon: envelope-at
         aria-label: email
         href: "mailto:ocmain@gocardec.com"  
         
@@ -46,8 +46,10 @@ website:
   page-footer: 
     left: |
       <span class="faux-block">&#169; Copyright 2024 Cardec Solutions</span>
+    center: |
+          <span class="faux-block">Created in <a href="https://quarto.org" target="_blank"> <img src="/img/quarto.png" width="70"></a></span>
     right: |
-      <span class="faux-block">Aug 2024</span>
+      <span class="faux-block">Sep 2024</span>
 
 project:
   type: website
