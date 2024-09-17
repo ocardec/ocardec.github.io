@@ -53,4 +53,6 @@ Deloitte & Touché, LLC \| Lead Data Scientist \| Apr 2021 - Feb 2023\
 Accenture Federal Services \| Data Science Intern \| Oct 2020 - Mar 2021\
 US Air Force \| Manager, Intelligence Analyst \| 2013 - 2020\
 US Air Force \| Information Manager & Database Administrator \| 2007 - 2013\
-US Air Force \| Aerospace Maintenance Craftsman \| 2000 - 2007\
+US Air Force \| Aerospace Maintenance Craftsman \| 2000 - 2007
+
+<link rel="icon" type="image/png" href="img/ocfavicon2"/>\

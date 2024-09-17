@@ -1,6 +1,4 @@
-# File to control the settings of ocquarto_portfolio by OC
 
-# Website settings:
 website:
   reader-mode: true
   description: " " # a brief slogan (optional)
