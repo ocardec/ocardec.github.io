@@ -55,4 +55,4 @@ US Air Force \| Manager, Intelligence Analyst \| 2013 - 2020\
 US Air Force \| Information Manager & Database Administrator \| 2007 - 2013\
 US Air Force \| Aerospace Maintenance Craftsman \| 2000 - 2007
 
-<link rel="icon" type="image/png" href="img/ocfavicon2"/>\
+<link rel="icon" type="image/png" href="img/ocfavicon3"/>\
