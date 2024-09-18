@@ -4,6 +4,8 @@ website:
   description: " " # a brief slogan (optional)
   image: img/my_image.jpeg
   favicon: img/ocfavicon3.png
+  google-analytics: "G-NDNR3PY3JP"
+  
   navbar:
     pinned: true
     collapse: true
