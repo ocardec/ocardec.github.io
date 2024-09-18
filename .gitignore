@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.gitattributes
 
 ocquarto_blog.Rproj
 ocquarto_portfolio.Rproj

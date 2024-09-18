@@ -22,8 +22,16 @@ website:
         href: resources/index.qmd
       - text: "Books"
         href: books/index.qmd
+      - text: "My Blog"
+        href: https://theupsidedownblog.netlify.app
+        target: _blank
+        
     # social media handles
     right:
+      - icon: journal-bookmark
+        aria-label: Blog
+        href: https://theupsidedownblog.netlify.app
+        target: _blank
       - icon: award
         href: https://meritpages.com/ocardec
         target: _blank
