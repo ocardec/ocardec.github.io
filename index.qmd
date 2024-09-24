@@ -37,9 +37,13 @@ about:
 
 ### Bio
 
+---
+
 Highly experienced Data Professional and Machine Learning Specialist with over 20 years of military experience and comprehensive knowledge across data analysis, visualizations, machine learning, deep learning, and Generative AI. Specializing in data pipelines, exploration, data cleaning and analysis, visualization, and modeling; with both structured and unstructured data sources. Expert in developing complex visualizations and leveraging advanced machine learning techniques to solve global challenges. Proven ability to translate complex data insights into actionable information for decision-making in public and private sectors.
 
 ### Education
+
+---
 
 University of Maryland, Global Campus - MS in Data Analytics (MSDA)\
 American Military University - BS in Information Technology Management\
@@ -47,12 +51,22 @@ Community College of the Air Force - AS in Intelligence Studies & Technology
 
 ### Experience
 
-WTI \| R&D, Data Strategist \| Jul 2023 - Present\
-GovCIO \| Data Scientist & ML Specialist \| Feb 2023 - Jul 2023\
-Deloitte & Touché, LLC \| Lead Data Scientist \| Apr 2021 - Feb 2023\
-Accenture Federal Services \| Data Science Intern \| Oct 2020 - Mar 2021\
-US Air Force \| Manager, Intelligence Analyst \| 2013 - 2020\
-US Air Force \| Information Manager & Database Administrator \| 2007 - 2013\
-US Air Force \| Aerospace Maintenance Craftsman \| 2000 - 2007
+---
+
+**ManTech** \| Data Scientist \| Sep 2024 - Present
+
+**WTI** \| R&D, Data Strategist \| Jul 2023 - Sep 2024
+
+**GovCIO** \| Data Scientist & ML Specialist \| Feb 2023 - Jul 2023
+
+**Deloitte & Touché, LLC** \| Lead Data Scientist \| Apr 2021 - Feb 2023
+
+**Accenture Federal Services** \| Data Science Intern \| Oct 2020 - Mar 2021
+
+**US Air Force** \| Manager, Intelligence Analyst \| 2013 - 2020
+
+**US Air Force** \| Information Manager & Database Administrator \| 2007 - 2013
+
+**US Air Force** \| Aerospace Maintenance Craftsman \| 2000 - 2007
 
 <link rel="icon" type="image/png" href="img/ocfavicon3"/>\
