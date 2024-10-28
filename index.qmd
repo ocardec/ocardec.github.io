@@ -4,22 +4,19 @@ id: about-block
 image: img/my_image.jpeg
 about:
   template: trestles
-  image-width: 13em
+  image-width: 12em
   image-shape: round
   
   links:
     - icon: twitter
-      text: Twitter
       href: https://twitter.com/CardO37474
       target: _blank
       
     - icon: github
-      text: Github
       href: https://github.com/ocardec
       target: _blank
       
     - icon: linkedin
-      text: LinkedIn
       href: https://www.linkedin.com/in/oscarcardec/
       target: _blank
       

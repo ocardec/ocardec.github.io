@@ -55,9 +55,9 @@ website:
     left: |
       <span class="faux-block">&#169; Copyright 2024 Cardec Solutions</span>
     center: |
-          <span class="faux-block">Created in <a href="https://quarto.org" target="_blank"> <img src="/img/quarto.png" width="70"></a></span>
+          <span class="faux-block">Created in <a href="https://quarto.org" target="_blank"> <img src="/img/quarto.png" width="75"></a></span>
     right: |
-      <span class="faux-block">Sep 2024</span>
+      <span class="faux-block">Oct 2024</span>
 
 project:
   type: website

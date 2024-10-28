@@ -16,7 +16,7 @@ bibliography: references.bib
 
 ### Introduction
 
-As previously explained on [Aircraft's Lateral Deviation - Part I](../multi_model_capstone/index.qmd), understanding of an aircraft lateral intent is vital across the air traffic industry for safety, and flight efficiency among other factors. This task can easily become unwieldy when triaging millions of measurements per hour across the entire National Air Space (NAS). On this section, I present a variety of potential predictive models for the classification of an aircraft’s lateral intent, and which could improve automated detection systems across this field.
+As previously explained on [Aircraft's Lateral Deviation - Part I](../multi_model_part1/index.qmd), understanding of an aircraft lateral intent is vital across the air traffic industry for safety, and flight efficiency among other factors. This task can easily become unwieldy when triaging millions of measurements per hour across the entire National Air Space (NAS). On this section, I present a variety of potential predictive models for the classification of an aircraft’s lateral intent, and which could improve automated detection systems across this field.
 
 > **Disclaimer:** **The views and opinions expressed in this report are those of the author and do not necessarily reflect the views or positions of any of the entities herein referred.**
 
