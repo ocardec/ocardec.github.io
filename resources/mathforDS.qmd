@@ -4,7 +4,6 @@ description: "A personal list of topics across the data science field."
 author: "Oscar Cardec"
 date: "2025-03-08"
 format: html
-image: mathtechfords.webp
 categories:
   - "data science"
   - "mathematics"
@@ -14,9 +13,11 @@ categories:
 
 <br>
 
+![](mathtechfords.webp){fig-align="center" width="350"}
+
 This is an opinionated list of mathematical topics and techniques essential across the data science field. Although, not an all-inclusive list, knowledgement and mastering of these provide a solid foundation useful for understanding of the diverse branches sustaining machine learning and artificial intelligence.
 
----
+------------------------------------------------------------------------
 
 #### **Linear Algebra**
 
