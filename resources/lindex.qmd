@@ -1,0 +1,235 @@
+---
+title: "Learning Plan: Data Science Mathematics"
+author: "Oscar Cardec"
+date: 2025-02-10
+---
+
+## **Structured Learning Plan for Data Science Mathematics**
+
+This **12-week learning plan** breaks down each topic into digestible weekly goals with recommended exercises and applications in data science.
+
+------------------------------------------------------------------------
+
+## **Week 1: Fundamentals of Linear Algebra**
+
+📌 **Topics**\
+- Introduction to Vectors and Matrices\
+- Matrix Operations: Addition, Multiplication, Transpose\
+- Identity, Inverse, and Special Matrices
+
+📚 **Resources**\
+- Gilbert Strang’s *Linear Algebra and Its Applications*\
+- Khan Academy: *Linear Algebra Fundamentals*
+
+📝 **Exercises**\
+- Solve basic matrix operations and vector manipulations\
+- Compute determinants and inverses manually and using NumPy
+
+🔍 **Applications in Data Science**\
+- Representing datasets as matrices\
+- Feature scaling and transformations
+
+------------------------------------------------------------------------
+
+## **Week 2: Advanced Linear Algebra for Data Science**
+
+📌 **Topics**\
+- Eigenvalues and Eigenvectors\
+- Singular Value Decomposition (SVD)\
+- Principal Component Analysis (PCA)
+
+📚 **Resources**\
+- *Deep Learning* by Ian Goodfellow (Chapter on Linear Algebra)\
+- 3Blue1Brown’s *Essence of Linear Algebra* series
+
+📝 **Exercises**\
+- Compute eigenvalues and eigenvectors using Python\
+- Perform PCA on a dataset using `sklearn.decomposition.PCA`
+
+🔍 **Applications in Data Science**\
+- Dimensionality reduction in high-dimensional datasets\
+- Image compression using SVD
+
+------------------------------------------------------------------------
+
+## **Week 3: Differential Calculus**
+
+📌 **Topics**\
+- Limits and Continuity\
+- Derivatives and Partial Derivatives\
+- Chain Rule and Gradient Calculation
+
+📚 **Resources**\
+- Calculus by James Stewart\
+- MIT OpenCourseWare: Single Variable Calculus\
+- 3Blue1Brown’s The essence of calculus series
+
+📝 **Exercises**\
+- Manually compute derivatives of polynomial and exponential functions\
+- Implement gradient computation in Python
+
+🔍 **Applications in Data Science**\
+- Compute loss function gradients in machine learning
+
+------------------------------------------------------------------------
+
+## **Week 4: Integral & Vector Calculus**
+
+📌 **Topics**\
+- Definite & Indefinite Integrals\
+- Gradient, Hessian, and Jacobian Matrices\
+- Applications in Probability
+
+📚 **Resources**\
+- *Mathematics for Machine Learning* by Deisenroth et al.
+
+📝 **Exercises**\
+- Compute multiple integrals manually and with Python (`sympy.integrate()`)
+
+🔍 **Applications in Data Science**\
+- Computing expectations in probability distributions
+
+------------------------------------------------------------------------
+
+## **Week 5: Probability Theory**
+
+📌 **Topics**\
+- Basics of Probability\
+- Bayes’ Theorem & Conditional Probability\
+- Discrete & Continuous Distributions
+
+📚 **Resources**\
+- *Probability and Statistics for Engineering and the Sciences* by Jay Devore\
+- Khan Academy: *Probability & Statistics*
+
+📝 **Exercises**\
+- Solve probability problems manually\
+- Simulate probability distributions using NumPy
+
+🔍 **Applications in Data Science**\
+- Naïve Bayes classifier for text classification
+
+------------------------------------------------------------------------
+
+## **Week 6: Statistics & Inference**
+
+📌 **Topics**\
+- Descriptive Statistics\
+- Hypothesis Testing (T-tests, Chi-Square)\
+- Maximum Likelihood Estimation
+
+📚 **Resources**\
+- *The Elements of Statistical Learning* by Hastie, Tibshirani, Friedman\
+- Think Stats by Allen B. Downey
+
+📝 **Exercises**\
+- Perform hypothesis testing using `scipy.stats`\
+- Compute confidence intervals on sample datasets
+
+🔍 **Applications in Data Science**\
+- Feature selection and A/B testing
+
+------------------------------------------------------------------------
+
+## **Week 7: Optimization Techniques**
+
+📌 **Topics**\
+- Gradient Descent & Variants (SGD, Adam, RMSprop)\
+- Lagrange Multipliers\
+- Convex vs. Non-Convex Optimization
+
+📚 **Resources**\
+- *Convex Optimization* by Boyd & Vandenberghe
+
+📝 **Exercises**\
+- Implement gradient descent from scratch in Python\
+- Optimize logistic regression parameters using gradient descent
+
+🔍 **Applications in Data Science**\
+- Training machine learning models efficiently
+
+------------------------------------------------------------------------
+
+## **Week 8: Numerical Methods**
+
+📌 **Topics**\
+- Newton’s Method\
+- Matrix Factorization (LU, QR)\
+- Iterative Methods (Jacobi, Gauss-Seidel)
+
+📚 **Resources**\
+- *Numerical Methods for Scientists and Engineers* by R.W. Hamming
+
+📝 **Exercises**\
+- Solve non-linear equations using Newton’s method in Python
+
+🔍 **Applications in Data Science**\
+- Efficient computations in large-scale datasets
+
+------------------------------------------------------------------------
+
+## **Week 9: Information Theory & Entropy**
+
+📌 **Topics**\
+- Entropy and Mutual Information\
+- KL Divergence & Cross-Entropy\
+- Shannon’s Theorem
+
+📚 **Resources**\
+- *Information Theory, Inference, and Learning Algorithms* by David MacKay
+
+📝 **Exercises**\
+- Compute entropy of a dataset using Python
+
+🔍 **Applications in Data Science**\
+- Feature selection in decision trees
+
+------------------------------------------------------------------------
+
+## **Week 10: Graph Theory**
+
+📌 **Topics**\
+- Graph Representations & Adjacency Matrices\
+- Graph Traversal (DFS, BFS)\
+- PageRank Algorithm
+
+📚 **Resources**\
+- *Networks, Crowds, and Markets* by Easley & Kleinberg
+
+📝 **Exercises**\
+- Implement DFS and BFS in Python\
+- Compute PageRank on a sample graph
+
+🔍 **Applications in Data Science**\
+- Knowledge graph creation and analysis
+
+------------------------------------------------------------------------
+
+## **Week 11: Time Series Analysis**
+
+📌 **Topics**\
+- Stationarity & Differencing\
+- Autoregressive Models (AR, MA, ARIMA)\
+- Fourier Transforms
+
+📚 **Resources**\
+- *Time Series Analysis and Its Applications* by Shumway & Stoffer
+
+📝 **Exercises**\
+- Implement ARIMA models using `statsmodels`
+
+🔍 **Applications in Data Science**\
+- Financial and economic forecasting
+
+------------------------------------------------------------------------
+
+## **Week 12: Final Project & Consolidation**
+
+🎯 **Objective**: Apply all learned concepts in a capstone project
+
+📝 **Project Ideas**\
+- Build a predictive model using PCA + Regression\
+- Implement an ML model and optimize it using gradient descent\
+- Perform statistical hypothesis testing on a real-world dataset
+
+------------------------------------------------------------------------

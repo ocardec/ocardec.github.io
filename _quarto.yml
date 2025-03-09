@@ -21,9 +21,15 @@ website:
       - text: "Projects"
         href: blog_index.qmd
       - text: "Resources"
-        href: resources/index.qmd
-      - text: "Books"
-        href: books/index.qmd
+        menu: 
+          - text: "Web-based Sources"
+            href: resources/index.qmd
+          - text: "Math Learning Plan"
+            href: resources/lindex.qmd
+          - text: "Advance Math & Techniques"
+            href: resources/mathforDS.qmd
+          - text: "Recommended Books"
+            href: resources/books/index.qmd
       - text: "My Blog"
         href: https://theupsidedownblog.netlify.app
         target: _blank
@@ -53,11 +59,11 @@ website:
     type: textbox
   page-footer: 
     left: |
-      <span class="faux-block">&#169; Copyright 2024 Cardec Solutions</span>
+      <span class="faux-block">&#169; Copyright 2025 Cardec Solutions</span>
     center: |
           <span class="faux-block">Created in <a href="https://quarto.org" target="_blank"> <img src="/img/quarto.png" width="75"></a></span>
     right: |
-      <span class="faux-block">Oct 2024</span>
+      <span class="faux-block">Mar 2025</span>
 
 project:
   type: website

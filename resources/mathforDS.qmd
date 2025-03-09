@@ -1,0 +1,149 @@
+---
+title: "Mathematics & Techniques for Data Science"
+description: "A personal list of topics across the data science field."
+author: "Oscar Cardec"
+date: "2025-03-08"
+format: html
+image: mathtechfords.webp
+categories:
+  - "data science"
+  - "mathematics"
+  - "ML"
+  - "AI"
+---
+
+<br>
+
+This is an opinionated list of mathematical topics and techniques essential across the data science field. Although, not an all-inclusive list, knowledgement and mastering of these provide a solid foundation useful for understanding of the diverse branches sustaining machine learning and artificial intelligence.
+
+---
+
+#### **Linear Algebra**
+
+-   **Vectors and Matrices**
+    -   [Vector Operations]{.underline}: Basic operations such as addition, subtraction, and scalar multiplication.
+    -   [Matrix Operations]{.underline}: Matrix multiplication, inversion, and transposition.
+    -   [Types of Matrices:]{.underline} Special matrices like diagonal, symmetric, and orthogonal matrices.
+-   **Systems of Linear Equations**
+    -   [Gaussian Elimination]{.underline}: Method for solving linear systems by reducing matrices to row echelon form.
+    -   [LU Decomposition]{.underline}: Factorization of a matrix into lower and upper triangular matrices.
+-   **Matrix Decompositions**
+    -   [Eigenvalues and Eigenvectors:]{.underline} Key concepts for understanding matrix transformations.
+    -   [Singular Value Decomposition (SVD):]{.underline} Decomposition of a matrix into singular vectors and singular values.
+    -   [Principal Component Analysis (PCA):]{.underline} Technique for reducing the dimensionality of data.
+-   **Vector Spaces**
+    -   [Basis and Dimension]{.underline}: Fundamental properties of vector spaces.
+    -   [Subspaces]{.underline}: Subsets of vector spaces that themselves are vector spaces.
+    -   [Orthogonality and Orthogonal Projections]{.underline}: Concepts for projecting vectors onto subspaces.
+-   **Linear Transformations**
+    -   [Matrix Representation]{.underline}: Representation of linear transformations using matrices.
+    -   [Change of Basis]{.underline}: Transforming coordinates from one basis to another.
+
+#### **Probability and Statistics**
+
+-   **Probability Theory**
+    -   [Basic Probability Concepts]{.underline}: Definitions and rules of probability.
+    -   [Conditional Probability and Bayes' Theorem:]{.underline} Probability of events given other events.
+    -   [Random Variables]{.underline}: Variables whose values are subject to randomness.
+    -   [Probability Distributions]{.underline}: Descriptions of how probabilities are distributed over values.
+    -   [Joint, Marginal, and Conditional Distributions:]{.underline} Relationships between multiple random variables.
+    -   [Expectation, Variance, and Covariance:]{.underline} Measures of central tendency and variability.
+-   **Statistical Inference**
+    -   [Point Estimation:]{.underline} Estimating population parameters from sample data.
+    -   [Confidence Intervals]{.underline}: Range of values within which a parameter is expected to lie.
+    -   [Hypothesis Testing:]{.underline} Procedure for testing assumptions about population parameters.
+    -   [p-values and Significance Levels]{.underline}: Metrics for assessing hypothesis test results.
+    -   [Maximum Likelihood Estimation (MLE):]{.underline} Method for estimating parameters by maximizing likelihood.
+-   **Bayesian Statistics**
+    -   [Bayesian Inference]{.underline}: Updating probabilities based on new data.
+    -   [Prior and Posterior Distributions]{.underline}: Distributions representing beliefs before and after observing data.
+    -   [Markov Chain Monte Carlo (MCMC):]{.underline} Algorithms for sampling from complex distributions.
+-   **Regression Analysis**
+    -   [Simple and Multiple Linear Regression:]{.underline} Modeling relationships between variables.
+    -   [Logistic Regression:]{.underline} Modeling binary outcome variables.
+    -   [Assumptions and Diagnostics:]{.underline} Checking the validity of regression models.
+-   **Advanced Topics in Statistics**
+    -   [Time Series Analysis]{.underline}: Analyzing data points collected over time.
+    -   [Survival Analysis:]{.underline} Analyzing time-to-event data.
+    -   [Non-parametric Methods:]{.underline} Statistical methods not assuming a specific data distribution.
+
+#### **Numerical Methods**
+
+-   **Optimization Techniques**
+    -   [Gradient Descent]{.underline}: Iterative method for finding local minima of functions.
+    -   [Stochastic Gradient Descent:]{.underline} Variant of gradient descent using random subsets of data.
+    -   [Conjugate Gradient Method:]{.underline} Optimization algorithm for large-scale linear systems.
+    -   [Newton's Method:]{.underline} Iterative method for finding successively better approximations to roots.
+-   **Numerical Linear Algebra**
+    -   [Matrix Factorization:]{.underline} Decomposing matrices into products of simpler matrices.
+    -   [Solving Linear Systems]{.underline}: Methods for finding solutions to linear equations.
+    -   [Eigenvalue Problems]{.underline}: Finding eigenvalues and eigenvectors of matrices.
+
+#### **Machine Learning**
+
+-   **Supervised Learning**
+    -   [Regression (Linear, Polynomial)]{.underline}: Predicting continuous outcomes from input features.
+    -   [Classification (k-NN, SVM, Decision Trees, Random Forests):]{.underline} Categorizing data into predefined classes.
+-   **Unsupervised Learning**
+    -   [Clustering (k-Means, Hierarchical, DBSCAN):]{.underline} Grouping similar data points together.
+    -   [Dimensionality Reduction (PCA, t-SNE, LDA):]{.underline} Reducing the number of variables in data.
+-   **Model Evaluation**
+    -   [Cross-Validation:]{.underline} Technique for assessing model performance on unseen data.
+    -   [ROC Curves and AUC:]{.underline} Metrics for evaluating classification model performance.
+    -   [Precision, Recall, F1-Score:]{.underline} Metrics for evaluating model accuracy and relevance.
+-   **Ensemble Methods**
+    -   [Bagging and Boosting:]{.underline} Techniques for improving model performance by combining multiple models.
+    -   [Random Forests:]{.underline} Ensemble learning method using multiple decision trees.
+    -   [Gradient Boosting Machines (GBM, XGBoost):]{.underline} Powerful ensemble methods for regression and classification.
+
+#### **Neural Networks and Deep Learning**
+
+-   **Fundamentals of Neural Networks**
+    -   [Perceptrons and Multilayer Perceptrons (MLP):]{.underline} Basic building blocks of neural networks.
+    -   [Activation Functions (ReLU, Sigmoid, Tanh):]{.underline} Functions introducing non-linearity into neural networks.
+    -   [Backpropagation and Gradient Descent]{.underline}: Algorithms for training neural networks.
+-   **Deep Learning Architectures**
+    -   [Convolutional Neural Networks (CNNs):]{.underline} Networks for processing grid-like data such as images.
+    -   [Recurrent Neural Networks (RNNs):]{.underline} Networks for processing sequential data.
+    -   [Long Short-Term Memory (LSTM):]{.underline} RNN variant for capturing long-term dependencies.
+    -   [Generative Adversarial Networks (GANs):]{.underline} Networks for generating new, synthetic data.
+-   **Deep Learning Techniques**
+    -   [Regularization (Dropout, Batch Normalization):]{.underline} Techniques for preventing overfitting.
+    -   [Transfer Learning:]{.underline} Leveraging pre-trained models for new tasks.
+    -   [Hyperparameter Tuning:]{.underline} Optimizing model parameters for better performance.
+    -   [Autoencoders]{.underline}: Networks for unsupervised learning of efficient codings.
+-   **Advanced Topics in Deep Learning**
+    -   [Attention Mechanisms:]{.underline} Techniques for focusing on relevant parts of input data.
+    -   [Transformers]{.underline}: Architectures for handling sequential data with attention mechanisms.
+    -   [Reinforcement Learning]{.underline}: Training models to make sequences of decisions.
+
+#### **Dimensionality Reduction**
+
+-   **Principal Component Analysis (PCA)**
+    -   [Eigenvalues and Eigenvectors:]{.underline} Key concepts for understanding PCA.
+    -   [Variance Explained:]{.underline} Measure of how much information is retained by principal components.
+-   **Singular Value Decomposition (SVD)**
+    -   [Low-Rank Approximations]{.underline}: Simplifying data by reducing its dimensionality.
+-   **Manifold Learning**
+    -   [t-SNE (t-Distributed Stochastic Neighbor Embedding):]{.underline} Technique for visualizing high-dimensional data.
+    -   [UMAP (Uniform Manifold Approximation and Projection):]{.underline} Method for dimensionality reduction and visualization.
+-   **Feature Selection and Extraction**
+    -   [L1 Regularization (Lasso):]{.underline} Technique for feature selection in regression models.
+    -   [Recursive Feature Elimination:]{.underline} Method for selecting important features by recursively removing less important ones.
+
+#### **Additional Important Topics**
+
+-   **Information Theory**
+    -   [Entropy and Information Gain:]{.underline} Measures of uncertainty and information content.
+    -   [Mutual Information:]{.underline} Measure of the mutual dependence between variables.
+-   **Graph Theory**
+    -   [Graph Representation:]{.underline} Ways to represent graphs using matrices and lists.
+    -   [Graph Algorithms (PageRank, Graph Neural Networks):]{.underline} Algorithms for processing graph-structured data.
+-   **Time Series Analysis**
+    -   [Autoregressive Models (AR, MA, ARIMA):]{.underline} Models for analyzing and forecasting time series data.
+    -   [Seasonal Decomposition:]{.underline} Breaking down time series data into seasonal components.
+    -   [Forecasting Techniques:]{.underline} Methods for predicting future values in time series data.
+-   **Natural Language Processing (NLP)**
+    -   [Text Preprocessing:]{.underline} Techniques for preparing text data for analysis.
+    -   [Word Embeddings (Word2Vec, GloVe):]{.underline} Methods for representing words as vectors.
+    -   [Sequence Models (RNN, LSTM, Transformer):]{.underline} Models for processing and understanding sequential data.

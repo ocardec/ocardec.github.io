@@ -20,6 +20,9 @@ Highly experienced Data Analyst and Machine Learning Specialist combining over 2
 ## PROFESSIONAL EXPERIENCE
 
 #### **Data Scientist \| ManTech International Corporation (Sep 2024 – Present)**
+| • Performs hands-on analysis and modeling involving the creation of intervention hypotheses and experiments, assessment of data needs and available sources, determination of optimal analytical approaches, performance of exploratory data analysis, and feature generation 
+
+| • Collaborates with mission stakeholders to define, frame, and scope mission challenges. Strategize best way forward for extracting, cleaning, and transforming operational and transactional data to build descriptive and predictive models/analytics in order to inform mission directors. Capture data inferences and communicate them via Palantir Envision foundry, PowerBI interactive dashboards, and/or PowerApps customized applications. 
 
 #### **Data Scientist - R&D Strategist \| Webworld Technologies, Inc. (Jul 2023 – Sep 2024)**
 
@@ -79,7 +82,7 @@ Highly experienced Data Analyst and Machine Learning Specialist combining over 2
 
 | • **Programming:** Python, R, SQL, C#, MATLAB, SAS, VSC, Git, TensorFlow, Keras, PyTorch
 | • **Data Science Tools:** Scikit-learn, Pandas, Numpy, Seaborn, Matplotlib, Plotly, Tidyverse
-| • **Cloud & BI:** Azure, AWS, GCP, KNIME, Qlik, Tableau, Power BI, IBM Cognos Analytics, SAS E-Miner
+| • **Cloud & BI:** Azure, AWS, GCP, KNIME, Qlik, Tableau, Power BI, PowerApps, IBM Cognos Analytics, SAS E-Miner
 | • **Machine Learning:** Time series forecasting, econometric models, classification techniques
 | • **Development:** Shiny, Quarto, Rmarkdown, Dash, Boken, Streamlit, Flask
 
