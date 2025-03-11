@@ -30,9 +30,6 @@ website:
             href: resources/mathforDS.qmd
           - text: "Recommended Books"
             href: resources/books/index.qmd
-      - text: "My Blog"
-        href: https://theupsidedownblog.netlify.app
-        target: _blank
         
     # social media handles
     right:
@@ -92,5 +89,4 @@ format:
     reference-location: margin
     footnotes-hover: true
     embed-resources: true
-
 editor: visual
