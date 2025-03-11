@@ -9,7 +9,11 @@ page-layout: full
 bibliography: references.bib
 ---
 
-### Introduction
+### Introduction      
+
+##### :: UPDATE::   
+
+**Gain Access to the CTG interactive application, click [HERE](https://01958549-b423-0b8e-cb57-83f8657d54e1.share.connect.posit.cloud/)**
 
 Cardiotocograms, also known as CTGs, have been instrumental within clinical medicine for a long time. Obstetricians use these measurements and classifications to obtain detailed information and intelligence about newborns and their mother prior and during labor. In 2018, an article presented through the Journal of Clinical Medicine detailed the practicality of CTG. The same article noted that interpretations of these censorial readings is mainly attributed to the observer; which creates challenges of consistency of interpretations and defies the human naked- eye. Questions like what happens if/when the interpreter misses a key detail, or what could be the meaning of a combination of diagnostic signals, furthermore, what time-sensitive conditions may these measurements expose, requiring immediate actions? These are few examples of concerns posed by the continuous practice of merely optical assessments of a CTG. [@zhao2018]
 
