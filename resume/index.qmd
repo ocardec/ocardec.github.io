@@ -1,66 +1,63 @@
+::: {.text-center}
 # OSCAR CARDEC
 
 | Williamsburg, Virginia
 | [ocmain\@gocardec.com](mailto:ocmain@gocardec.com)
-| 443.296.2380
-
-------------------------------------------------------------------------
+| (443) 296-2380
+:::
+<br/>
 
 ## PROFESSIONAL SUMMARY
 
-Highly experienced Data Analyst and Machine Learning Specialist combining over 20 years of military experience and comprehensive knowledge across data analytics, machine learning, deep learning, and Generative AI. Specializing in data pipelines, data exploration, data pre-processing, data analysis, visualizations and data modeling with both structured and unstructured sources. Proven ability to translate stakeholder requirements and pain-points into actionable data science solutions. Expert in leading discussions across functions, building data science credibility, and mentoring teams in critical thinking, root cause analysis and problem-solving to enable decision-making at public and private sectors. Active security clearance and extensive experience supporting federal clients.
+Lead Data Scientist combining 20+ years of national security and military leadership with 8 years of specialized experience in data science, full-stack machine learning pipelines, and Generative AI. Proven record of orchestrating cross-functional data engineering initiatives for the DoD, deploying Palantir solutions and cloud analytics ecosystems, and translating complex operational challenges into actionable decision-making tools. Active Security Clearance. Security+ Certified.
 
 ## CORE COMPETENCIES
 
-| • **Machine Learning:** Applied AI, predictive modeling, generative AI, and anomaly detection
-| • **Data Analysis:** Exploratory analysis, data cleaning, statistical inferences, and complex visualizations
-| • **Strategic Leadership:** Decision analysis, critical thinking, and project management
-| • **Technical Expertise:** Advanced proficiency in Python, R, Power BI, and cloud-based tools
+| • **Machine Learning:** Optimization, Survival Analysis, Time-Series, Clustering, NLP, Neural Networks
+| • **Data Analysis:** Inferential Statistics, EDA, Data Engineering, Advanced Data Interface & Visualizations
+| • **Strategic Leadership:** Decision Analysis, Critical Thinking, Project Management, Mentorship
+| • **Technical Expertise:** Python, SQL, R, Scikit Learn, TensorFlow, PySpark, Palantir Foundry, Power BI
 
 ## PROFESSIONAL EXPERIENCE
 
 #### **Data Scientist \| ManTech International Corporation (Sep 2024 – Present)**
-| • Performs hands-on analysis and modeling involving the creation of intervention hypotheses and experiments, assessment of data needs and available sources, determination of optimal analytical approaches, performance of exploratory data analysis, and feature generation 
+| •	Led data orchestration strategy/implementation; standardized Enterprise data management framework for 5500+ personnel workforce; $13.6 Million assets valuation
 
-| • Collaborates with mission stakeholders to define, frame, and scope mission challenges. Strategize best way forward for extracting, cleaning, and transforming operational and transactional data to build descriptive and predictive models/analytics in order to inform mission directors. Capture data inferences and communicate them via Palantir Envision foundry, PowerBI interactive dashboards, and/or PowerApps customized applications. 
+| •	Integrated Palantir Envision/Air Force talent management & promotion board tracking capability, leveraged AIP insight extraction; expedited 4 COCOMs FORGEN decision-making cycle/weapon systems 
+
+| •	Baselined DAF Survival Analysis model, exposed groups/targets of opportunity; sustained retention quotas for top-rated flying career fields/22,000 members
+
+| •	Developed first HAF-level PowerApps consolidated framework/integrated 70+ Power BI interactive reports; synchronized secured-information across all MAJCOM/COCOMs
+
+| •	Data-mined/migrated 22 million historical financial records, developed first DFAS special pay Envision Workshop application; informed HR incentive policies for ~200K military members
 
 #### **Data Scientist - R&D Strategist \| Webworld Technologies, Inc. (Jul 2023 – Sep 2024)**
 
-| • Directed cloud solution research, market analysis, and data migration, ensured operational integrity.
-| • Steered Enterprise Data Management Plan review and implementation in support of the ACC & DAF.
-| • Developed strategies for data catalog and data governance in line with DoD VAULTIS guidelines.
-| • Overhauled ML practices and data mining strategies; standardized decision-making, workflow analysis.
-| • Created and optimized data taxonomies/ontologies, and audited cloud capabilities for analytic solutions.
+| •	Directed Data Catalog cloud solution market analysis, advised Data Officer on multi-year/6 million contract; led Air Force first smart data-assets inventory & sustained DoD VAULTIS federal mandate
+
+| •	Steered HAF/A2 Data Management implementation plan, adopted “medallion architecture”; strategized data governance framework & postured Air Force DCGS OBI production framework
 
 #### **Data Scientist - ML Specialist \| GovCIO (Feb 2023 – Jul 2023)**
 
-| • Directed machine learning projects, utilizing data mining and anomaly detection to uncover insights.
-| • Led quantitative analysis using operations research tools and time-series forecasting.
-| • Conducted training on Splunk MLTK and integrated it into daily operations, transformed probabilistic measures to detect network traffic interruptions.
+| •	Led quantitative analysis/anomaly detection program, maintained 110 network/systems performance health; equipped global cyber-security operations for 1,200 medical facilities with real-time information
+
+| •	Established first Splunk MLTK introductory training session, standardized comms protocols traffic analysis, fingerprint & signature analytics; sustained network protection for 15.6 million veterans
 
 #### **Lead Data Scientist \| Deloitte & Touché, LLP. (Apr 2021 – Feb 2023)**
 
-| • Spearheaded data analysis for DHS/CBP, optimizing assets allocations through historical data insights.
-| • Implemented machine learning models and provided mentoring to junior staff.
-| • Developed K-means algorithms for public health initiatives and led analytic proof of concept projects.
-| • Advanced analytic practices for ACC Force Generation, improved data strategy and data sources ingestion.
-| • Conducted social network analysis, topic modeling, and sentiment analysis, advanced analytical practices.
+| •	Spearheaded DHS/CBP Queuing modeling, optimized assets’ allocations across entire CONUS national borders; sustained U.S. Border Patrol Strategy and safety of ~19,000 security agents. 
 
-#### **Data Science Intern \| Accenture Federal Services (Oct 2020 – Jan 2021)**
+| •	Led social network analysis, and MisDis Information advanced analytics including authentication, attribution, and behavioral analytics, liaised information with cross-functional teams in support of Government & Public Service practice
 
-| • Sustained national security operations by employing novel natural language processing, social media and web content scraping, topic mining, and sentiment analysis techniques.
-| • Utilized exploratory data analysis tradecraft and machine learning procedures to uncover hidden data, meeting client's information requests.
+| •	Steered public health K-means/Clustering analysis, identified groups at risk; drove vaccination campaigns priorities for ~ 800,000 regional population
+
+#### **Data Scientist Intern \| Accenture Federal Services (Oct 2020 – Jan 2021)**
+
+| •	Internship with Accenture Federal Services; led social media/web content scraping, topic modeling, sentiment analysis, and exploratory data analysis tradecraft to uncover hidden data; answered 27 RFIs
 
 #### **Senior Data Analyst, Intelligence Operations \| United States Air Force (May 2014 – Mar 2021)**
 
-| • Managed intelligence collection functions, improving operational capabilities by 85%.
-| • Delivered over 1200 intelligence briefs to senior leadership.
-| • Directed the allocation and training of 2,600 Intelligence Analysts, enhancing workforce efficiency.
-| • Supervised 1,300 personnel in ISR missions and managed DCGS programs.
-| • Led joint teams in foreign missile analysis and multi-source data extraction.
-| • Oversaw counter-terrorism operations, assessing global targets and cyber objectives.
-| • Directed counter-proliferation analysis and reporting, leading to international sanctions.
-| • Coordinated Force Protection across national organizations, ensuring the safe return of personnel.
+| • Managed intelligence collection, analysis, and reporting functions. Directed training and allocation of over 2,500 Intelligence Analysts. Sustained intelligence operations in support of the IC and global security. 
 
 ## EDUCATION
 
@@ -69,7 +66,7 @@ Highly experienced Data Analyst and Machine Learning Specialist combining over 2
 | • Integrated Support Vector Machine (SVM) and K-Nearest Neighbors (KNN) heuristic algorithms to enhance Federal Aviation Administration’s NextGen R&D Office aircraft’s lateral deviation anomaly detection tools.
 | • Designed Conditional Inference Tree (CTREE) for classification and interpretation of CTGs, optimizing identification of at-risk newborns and their mothers.
 | • Developed an irregular-cells Convolutional Neural Network (CNN) predictive model for early detection of breast carcinoma.
-| • Classified Landsat Multispectral Scanner images using K-means model, base-lining image study with vector/centroid pixel- dimension features.
+| • Classified Landsat Multi-spectral Scanner images using K-means model, base-lining image study with vector/centroid pixel- dimension features.
 
 <br/>
 
@@ -83,10 +80,7 @@ Highly experienced Data Analyst and Machine Learning Specialist combining over 2
 | • **Programming:** Python, R, SQL, C#, MATLAB, SAS, VSC, Git, TensorFlow, Keras, PyTorch
 | • **Data Science Tools:** Scikit-learn, Pandas, Numpy, Seaborn, Matplotlib, Plotly, Tidyverse
 | • **Cloud & BI:** Azure, AWS, GCP, KNIME, Qlik, Tableau, Power BI, PowerApps, IBM Cognos Analytics, SAS E-Miner
-| • **Machine Learning:** Time series forecasting, econometric models, classification techniques
+| • **Machine Learning:** Time series forecasting, econometric models, classification and optimization techniques
 | • **Development:** Shiny, Quarto, Rmarkdown, Dash, Boken, Streamlit, Flask
 
 <br/>
-
-**Data Science Additional Packages**\
-beautifulsoup, caret, docker, dv-api, faker, geopandas, ggmap, gmodels, googlevis, ggvis, graphDB, H2O, iml, korpus, label studio, mobi, mysql, nltk, oneR, parallel, protégé, pyspark, pytorch, quanteda, ranger, scipy, scrapy, selenium, simpy, sdv, splunk mltk, spyder, spacy, sql, sqlite3, statsmodels, Tesseract OCR, tidygraph, tm, vip, xgboost, zoo

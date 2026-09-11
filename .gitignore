@@ -9,3 +9,5 @@ ocquarto_portfolio.Rproj
 
 /img/
 /.quarto/
+
+**/*.quarto_ipynb

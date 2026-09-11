@@ -3,13 +3,13 @@ website:
   reader-mode: true
   description: " " # a brief slogan (optional)
   image: img/my_image.jpeg
-  favicon: img/ocfavicon3.png
+  favicon: img/ocfavicon2.jpg
   google-analytics: "G-NDNR3PY3JP"
   
   navbar:
     pinned: true
     collapse: true
-    logo: img/ocfavicon3.png
+    logo: img/ocfavicon2.jpg
     # sub-pages
     left:
       - text: "Home"
@@ -56,11 +56,11 @@ website:
     type: textbox
   page-footer: 
     left: |
-      <span class="faux-block">&#169; Copyright 2025 Cardec Solutions</span>
+      <span class="faux-block">&#169; Copyright 2026 Cardec Solutions</span>
     center: |
-          <span class="faux-block">Created in <a href="https://quarto.org" target="_blank"> <img src="/img/quarto.png" width="75"></a></span>
+          <span class="faux-block">Created in <a href="https://quarto.org" target="_blank"> <img src="/img/quarto_logo.png" width="75"></a></span>
     right: |
-      <span class="faux-block">Mar 2025</span>
+      <span class="faux-block">Sep 2026</span>
 
 project:
   type: website

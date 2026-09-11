@@ -36,7 +36,7 @@ about:
 
 ------------------------------------------------------------------------
 
-Highly experienced Data Professional and Machine Learning Specialist with over 20 years of military experience and comprehensive knowledge across data analysis, visualizations, machine learning, deep learning, and Generative AI. Specializing in data pipelines, exploration, data cleaning and analysis, visualization, and modeling; with both structured and unstructured data sources. Expert in developing complex visualizations and leveraging advanced machine learning techniques to solve global challenges. Proven ability to translate complex data insights into actionable information for decision-making in public and private sectors.
+Lead Data Scientist combining 20+ years of national security and military leadership with 8 years of specialized experience in data science, full-stack machine learning pipelines, and Generative AI. Proven record of orchestrating cross-functional data engineering initiatives for the DoD, deploying Palantir solutions and cloud analytics ecosystems, and translating complex operational challenges into actionable decision-making tools. Active Security Clearance. Security+ Certified.
 
 ### Education
 
@@ -50,15 +50,15 @@ Community College of the Air Force - AS in Intelligence Studies & Technology
 
 ------------------------------------------------------------------------
 
-**ManTech** \| Data Scientist \| Sep 2024 - Present
+**ManTech** \| Lead Data Scientist \| Sep 2024 - Present
 
 **WTI** \| R&D, Data Strategist \| Jul 2023 - Sep 2024
 
 **GovCIO** \| Data Scientist & ML Specialist \| Feb 2023 - Jul 2023
 
-**Deloitte & Touché, LLC** \| Lead Data Scientist \| Apr 2021 - Feb 2023
+**Deloitte & Touché, LLC** \| Data Scientist \| Apr 2021 - Feb 2023
 
-**Accenture Federal Services** \| Data Science Intern \| Oct 2020 - Mar 2021
+**Accenture Federal Services** \| Data Scientist Intern \| Oct 2020 - Mar 2021
 
 **US Air Force** \| Manager, Intelligence Analyst \| 2013 - 2020
 
@@ -66,4 +66,4 @@ Community College of the Air Force - AS in Intelligence Studies & Technology
 
 **US Air Force** \| Aerospace Maintenance Craftsman \| 2000 - 2007
 
-<link rel="icon" type="image/png" href="img/ocfavicon3"/>\
+<link rel="icon" type="image/jpg" href="img/ocfavicon2"/>\

@@ -6,7 +6,7 @@ listing: false
 
 <br/>
 
-![](dswindow.jpg){fig-align="center" width="602"}
+![](dswindow.jpg){fig-align="center" width="602" style="border: 3px solid #333; border-radius: 6px;"}
 
 <br/>
 
